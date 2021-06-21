@@ -1,0 +1,58 @@
+Problem Solving Paradigms
+Overview and Motivation
+In this chapter, we discuss four problem solving paradigms commonly used to attack problems
+in programming contests, namely Complete Search (a.k.a Brute Force), Divide and
+Conquer, the Greedy approach, and Dynamic Programming. All competitive programmers,
+including IOI and ICPC contestants, need to master these problem solving paradigms (and
+more) in order to be able to attack a given problem with the appropriate ‘tool’. Hammering
+every problem with Brute Force solutions will not enable anyone to perform well in contests.
+To illustrate, we discuss four simple tasks below involving an array A containing n ≤ 10K
+small integers ≤ 100K (e.g. A = {10, 7, 3, 5, 8, 2, 9}, n = 7) to give an overview of what
+happens if we attempt every problem with Brute Force as our sole paradigm.
+1. Find the largest and the smallest element of A. (10 and 2 for the given example).
+2. Find the kth smallest element in A. (if k = 2, the answer is 3 for the given example).
+3. Find the largest gap g such that x, y ∈ A and g = |x − y|. (8 for the given example).
+4. Find the longest increasing subsequence of A. ({3, 5, 8, 9} for the given example).
+The answer for the first task is simple: Try each element of A and check if it is the current
+largest (or smallest) element seen so far. This is an O(n) Complete Search solution.
+The second task is a little harder. We can use the solution above to find the smallest
+value and replace it with a large value (e.g. 1M) to ‘delete’ it. We can then proceed to find
+the smallest value again (the second smallest value in the original array) and replace it with
+1M. Repeating this process k times, we will find the kth smallest value. This works, but
+if k = n
+2 (the median), this Complete Search solution runs in O(n
+2
+× n) = O(n2). Instead,
+we can sort the array A in O(n log n), returning the answer simply as A[k-1]. However, a
+better solution for a small number of queries is the expected O(n) solution shown in Section
+9.29. The O(n log n) and O(n) solutions above are Divide and Conquer solutions.
+For the third task, we can similarly consider all possible two integers x and y in A, checking
+if the gap between them is the largest for each pair. This Complete Search approach runs
+in O(n2). It works, but is slow and inefficient. We can prove that g can be obtained by
+finding the difference between the smallest and largest elements of A. These two integers can
+be found with the solution of the first task in O(n). No other combination of two integers
+in A can produce a larger gap. This is a Greedy solution.
+For the fourth task, trying all O(2n) possible subsequences to find the longest increasing
+one is not feasible for all n ≤ 10K. In Section 3.5.2, we discuss a simple O(n2) Dynamic
+Programming solution and also the faster O(n log k) Greedy solution for this task.
+Here is some advice for this chapter: Please do not just memorize the solutions for each
+problem discussed, but instead remember and internalize the thought process and problem
+solving strategies used. Good problem solving skills are more important than memorized
+solutions for well-known Computer Science problems when dealing with (often creative and
+novel) contest problems.
+Complete Search
+The Complete Search technique, also known as brute force or recursive backtracking, is a
+method for solving a problem by traversing the entire (or part of the) search space to obtain
+the required solution. During the search, we are allowed to prune (that is, choose not to
+explore) parts of the search space if we have determined that these parts have no possibility
+of containing the required solution.
+In programming contests, a contestant should develop a Complete Search solution when
+there is clearly no other algorithm available (e.g. the task of enumerating all permutations
+of {0, 1, 2, . . .,N − 1} clearly requires O(N!) operations) or when better algorithms exist,
+but are overkill as the input size happens to be small (e.g. the problem of answering Range
+Minimum Queries as in Section 2.4.3 but on static arrays with N ≤ 100 is solvable with an
+O(N) loop for each query).
+In ICPC, Complete Search should be the first solution considered as it is usually easy
+to come up with such a solution and to code/debug it. Remember the ‘KISS’ principle:
+Keep It Short and Simple. A bug-free Complete Search solution should never receive the
+Wrong Answer (WA) response in programming contests as it explores the entire search space. 

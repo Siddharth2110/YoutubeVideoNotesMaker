@@ -1,0 +1,69 @@
+• Input and Output description. In this section, you will be given details on how
+the input is formatted and on how you should format your output. This part is usually
+written in a formal manner. A good problem should have clear input constraints as the
+same problem might be solvable with different algorithms for different input constraints
+(see Table 1.4).
+• Sample Input and Sample Output. Problem authors usually only provide trivial
+test cases to contestants. The sample input/output is intended for contestants to check
+their basic understanding of the problem and to verify if their code can parse the given
+input using the given input format and produce the correct output using the given
+output format. Do not submit your code to the judge if it does not even pass the given
+sample input/output. See Section 1.2.5 about testing your code before submission.
+• Hints or Footnotes. In some cases, the problem authors may drop hints or add
+footnotes to further describe the problem.
+Typical Input/Output Routines
+Multiple Test Cases
+In a programming contest problem, the correctness of your code is usually determined by
+running your code against several test cases. Rather than using many individual test case
+files, modern programming contest problems usually use one test case file with multiple test
+cases included. In this section, we use a very simple problem as an example of a multipletest-
+cases problem: Given two integers in one line, output their sum in one line. We will
+illustrate three possible input/output formats:
+• The number of test cases is given in the first line of the input.
+• The multiple test cases are terminated by special values (usually zeroes).
+• The multiple test cases are terminated by the EOF (end-of-file) signal.
+Case Numbers and Blank Lines
+Some problems with multiple test cases require the output of each test case to be numbered
+sequentially. Some also require a blank line after each test case. Let’s modify the simple
+problem above to include the case number in the output (starting from one) with this output
+format: “Case [NUMBER]: [ANSWER]” followed by a blank line for each test case. Assuming
+that the input is terminated by the EOF signal.
+Some other problems require us to output blank lines only between test cases. If we use the
+approach above, we will end up with an extra new line at the end of our output, producing
+unnecessary ‘Presentation Error’ (PE) verdict.
+Variable Number of Inputs
+Let’s change the simple problem above slightly. For each test case (each input line), we are
+now given an integer k (k ≥ 1), followed by k integers. Our task is now to output the sum
+of these k integers. Assuming that the input is terminated by the EOF signal and we do not
+require case numbering.
+Time to Start the Journey
+There is no better way to begin your journey in competitive programming than to solve a
+few programming problems. To help you pick problems to start with among the ≈ 4097
+problems in UVa online judge [47], we have listed some of the easiest Ad Hoc problems
+below. More details about Ad Hoc problems will be presented in the next Section 1.4.
+• Super Easy
+You should get these problems AC9 in under 7 minutes10 each! If you are new to competitive
+programming, we strongly recommend that you start your journey by solving
+some problems from this category after completing the previous Section 1.3.2. Note:
+Since each category contains numerous problems for you to try, we have highlighted a
+maximum of three (3) must try * problems in each category. These are the problems
+that, we think, are more interesting or are of higher quality.
+• Easy
+We have broken up the ‘Easy’ category into two smaller ones. The problems in this
+category are still easy, but just ‘a bit’ harder than the ‘Super Easy’ ones.
+• Medium: One Notch Above Easy
+Here, we list some other Ad Hoc problems that may be slightly trickier (or longer)
+than those in the ‘Easy’ category.
+The Ad Hoc Problems
+We will terminate this chapter by discussing the first proper problem type in the ICPCs
+and IOIs: The Ad Hoc problems. According to USACO [48], the Ad Hoc problems are
+problems that ‘cannot be classified anywhere else’ since each problem description and its
+corresponding solution are ‘unique’. Many Ad Hoc problems are easy (as shown in Section
+1.3), but this does not apply to all Ad Hoc problems.
+Ad Hoc problems frequently appear in programming contests. In ICPC, ≈ 1-2 problems
+out of every ≈ 10 problems are Ad Hoc problems. If the Ad Hoc problem is easy, it will
+usually be the first problem solved by the teams in a programming contest. However, there
+were cases where solutions to the Ad Hoc problems were too complicated to implement,
+causing some teams to strategically defer them to the last hour. In an ICPC regional contest
+with about 60 teams, your team would rank in the lower half (rank 30-60) if you can only
+solve Ad Hoc problems.

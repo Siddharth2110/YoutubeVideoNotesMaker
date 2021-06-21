@@ -1,0 +1,58 @@
+• Ad Hoc problems in other chapters
+There are many other Ad Hoc problems which we have shifted to other chapters since
+they required knowledge above basic programming skills.
+– Ad Hoc problems involving the usage of basic linear data structures (especially
+arrays) are listed in Section 2.2.
+– Ad Hoc problems involving mathematical computation are listed in Section 5.2.
+– Ad Hoc problems involving string processing are listed in Section 6.3.
+– Ad Hoc problems involving basic geometry are listed in Section 7.2.
+– Ad Hoc problems listed in Chapter 9.
+Tips: After solving a number of programming problems, you begin to realize a pattern
+in your solutions. Certain idioms are used frequently enough in competitive programming
+implementation for shortcuts to be useful. From a C/C++ perspective,
+these idioms might include: Libraries to be included (cstdio, cmath, cstring, etc),
+data type shortcuts (ii, vii, vi, etc), basic I/O routines (freopen, multiple input format,
+etc), loop macros (e.g. #define REP(i, a, b) for (int i = int(a); i <=
+int(b); i++), etc), and a few others. A competitive programmer using C/C++ can
+store these in a header file like ‘competitive.h’. With such a header, the solution to
+every problem begins with a simple #include<competitive.h>. However, this tips
+should not be used beyond competitive programming, especially in software industry.
+Chapter 2
+Data Structures and Libraries
+If I have seen further it is only by standing on the shoulders of giants.
+— Isaac Newton
+2.1 Overview and Motivation
+A data structure (DS) is a means of storing and organizing data. Different data structures
+have different strengths. So when designing an algorithm, it is important to pick one that
+allows for efficient insertions, searches, deletions, queries, and/or updates, depending on what
+your algorithm needs. Although a data structure does not in itself solve a (programming
+contest) problem (the algorithm operating on it does), using an appropriately efficient data
+structure for a problem may be the difference between passing or exceeding the problem’s
+time limit. There can be many ways to organize the same data and sometimes one way is
+better than the other in some contexts. We will illustrate this several times in this chapter.
+A keen familiarity with the data structures and libraries discussed in this chapter is critically
+important for understanding the algorithms that use them in subsequent chapters.
+As stated in the preface of this book, we assume that you are familiar with the basic
+data structures listed in Section 2.2-2.3 and thus we will not review them in this book.
+Instead, we will simply highlight the fact that there exist built-in implementations for these
+elementary data structures in the C++ STL and Java API1. If you feel that you are not
+entirely familiar with any of the terms or data structures mentioned in Section 2.2-2.3,
+please review those particular terms and concepts in the various reference books2 that cover
+them, including classics such as the “Introduction to Algorithms” [7], “Data Abstraction and
+Problem Solving” [5, 54], “Data Structures and Algorithms” [12], etc. Continue reading this
+book only when you understand at least the basic concepts behind these data structures.
+Note that for competitive programming, you only need to know enough about these data
+structures to be able to select and to use the correct data structures for each given contest
+problem. You should understand the strengths, weaknesses, and time/space complexities of
+typical data structures. The theory behind them is definitely good reading, but can often
+be skipped or skimmed through, since the built-in libraries provide ready-to-use and highly
+reliable implementations of otherwise complex data structures. This is not a good practice,
+but you will find that it is often sufficient. Many (younger) contestants have been able
+to utilize the efficient (with a O(log n) complexity for most operations) C++ STL map (or Java TreeMap) implementations to store dynamic collections of key-data pairs without an
+understanding that the underlying data structure is a balanced Binary Search Tree, or use
+the C++ STL priority queue (or Java PriorityQueue) to order a queue of items without
+understanding that the underlying data structure is a (usually Binary) Heap. Both data
+structures are typically taught in year one Computer Science curriculae.This chapter is divided into three parts. Section 2.2 contains basic linear data structures
+and the basic operations they support. Section 2.3 covers basic non-linear data structures
+such as (balanced) Binary Search Trees (BST), (Binary) Heaps, and Hash Tables, as well
+as their basic operations.

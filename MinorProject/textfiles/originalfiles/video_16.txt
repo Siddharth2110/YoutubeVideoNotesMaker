@@ -1,0 +1,67 @@
+Competitive programming
+The core directive in ‘Competitive Programming’ is this: “Given well-known Computer
+Science (CS) problems, solve them as quickly as possible!”.
+Let’s digest the terms one by one. The term ‘well-known CS problems’ implies that in
+competitive programming, we are dealing with solved CS problems and not research problems
+(where the solutions are still unknown). Some people (at least the problem author) have
+definitely solved these problems before. To ‘solve them’ implies that we1 must push our CS
+knowledge to a certain required level so that we can produce working code that can solve
+these problems too—at least in terms of getting the same output as the problem author
+using the problem author’s secret2 test data within the stipulated time limit. The need to
+solve the problem ‘as quickly as possible’ is where the competitive element lies—speed is a
+very natural goal in human behavior.
+Please note that being well-versed in competitive programming is not the end goal, but
+only a means to an end. The true end goal is to produce all-rounder computer scientists/
+programmers who are much readier to produce better software and to face harder CS
+research problems in the future. The founders of the ACM International Collegiate Programming
+Contest (ICPC) [66] have this vision and we, the authors, agree with it. With
+this book, we play our little role in preparing the current and the future generations to be
+more competitive in dealing with well-known CS problems frequently posed in the recent
+ICPCs and the International Olympiad in Informatics (IOI)s.
+Tips to be Competitive
+If you strive to be like competitive programmers D or E as illustrated above—that is, if
+you want to be selected (via provincial/state → national team selections) to participate and
+obtain a medal in the IOI [34], or to be one of the team members that represents your
+University in the ACM ICPC [66] (nationals → regionals → and up to world finals), or to
+do well in other programming contests—then this book is definitely for you!
+In the subsequent chapters, you will learn everything from the basic to the intermediate
+or even to the advanced3 data structures and algorithms that have frequently appeared in
+recent programming contests, compiled from many sources [50, 9, 56, 7, 40, 58, 42, 60, 1,
+38, 8, 59, 41, 62, 46] (see Figure 1.4). You will not only learn the concepts behind the data
+structures and algorithms, but also how to implement them efficiently and apply them to
+appropriate contest problems. On top of that, you will also learn many programming tips
+derived from our own experiences that can be helpful in contest situations. We start this
+book by giving you several general tips below:
+Tip 1: Type Code Faster!
+No kidding! Although this tip may not mean much as ICPC and (especially) IOI are not
+typing contests, we have seen Rank i and Rank i + 1 ICPC teams separated only by a few
+minutes and frustrated IOI contestants who miss out on salvaging important marks by not
+being able to code a last-minute brute force solution properly. When you can solve the same
+number of problems as your competitor, it will then be down to coding skill (your ability to
+produce concise and robust code) and ... typing speed.
+Try this typing test at http://www.typingtest.com and follow the instructions there
+on how to improve your typing skill. Steven’s is ∼85-95 wpm and Felix’s is ∼55-65 wpm. If
+your typing speed is much less than these numbers, please take this tip seriously!
+On top of being able to type alphanumeric characters quickly and correctly, you will
+also need to familiarize your fingers with the positions of the frequently used programming
+language characters: parentheses () or {} or square brackets [] or angle brackets <>, the
+semicolon ; and colon :, single quotes ‘’ for characters, double quotes “” for strings, the
+ampersand &, the vertical bar or the ‘pipe’ |, the exclamation mark !, etc.
+As a little practice, try typing the C++ source code below as fast as possible.
+Tip 2: Quickly Identify Problem Types
+The classification in Table 1.1 is adapted from [48] and by no means complete. Some techniques,
+e.g. ‘sorting’, are not classified here as they are ‘trivial’ and usually used only as a
+‘sub-routine’ in a bigger problem. We do not include ‘recursion’ as it is embedded in categories
+like recursive backtracking or Dynamic Programming. We also omit ‘data structures’
+as the usage of efficient data structure can be considered to be integral for solving harder
+problems. Of course, problems sometimes require mixed techniques: A problem can be classified
+into more than one type. For example, Floyd Warshall’s algorithm is both a solution
+for the All-Pairs Shortest Paths (APSP, Section 4.5) graph problem and a Dynamic Programming
+(DP) algorithm (Section 3.5). Prim’s and Kruskal’s algorithms are both solutions
+for the Minimum Spanning Tree (MST, Section 4.3) graph problem and Greedy algorithms
+(Section 3.4). In Section 8.4, we will discuss (harder) problems that require more than one
+algorithms and/or data structures to be solved.
+In the (near) future, these classifications may change. One significant example is Dynamic
+Programming. This technique was not known before 1940s, nor frequently used in ICPCs or
+IOIs before mid 1990s, but it is considered a definite prerequisite today. As an illustration:
+There were ≥ 3 DP problems (out of 11) in the recent ICPC World Finals 2010.

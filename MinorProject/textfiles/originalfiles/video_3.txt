@@ -1,0 +1,12 @@
+McLaren’s Formula One racing team
+McLaren Racing Limited is a British Formula One team. The racing car team uses real-time car sensor data during car races, identifies issues with its racing cars using predictive analytics and takes corrective actions pro-actively before it’s too late.
+Mint.com
+Mint.com is a free web-based personal financial management service for the US and Canada. Mint.com uses big data to provide users information about their spending by category and have a look where they spent their money in a given week, month or year.
+Singapore healthcare
+The healthcare providers in Singapore used analytics to better understand each patient’s condition, lifestyle choices, work and home environment. They can create personalized treatment plans tailored to that person’s individual behaviour.
+Sprint
+Sprint Corporation, is a United States telecommunications holding company that provides wireless services and is also a major global Internet carrier. It is the third largest U.S. wireless network operator as of 2014.Wireless carrier Sprint, uses smarter computing – primarily big data analytics to put real-time intelligence and control back into the network driving a 90% increase in capacity.
+T-Mobile USA
+The mobile operator has integrated Big Data across multiple IT systems to combine customer transaction and interactions data in order to better predict customer defections. By leveraging social media data (Big Data) along with transaction data from CRM and Billing systems, T-Mobile USA has been able to “cut customer defections in half in a single quarter”.
+UPS
+United Parcel Service of North America, Inc., referred as UPS , is one of the largest shipment and logistics companies in the world. The company tracks data on 16.3 million packages per day for 8.8 million customers, with an average of 39.5 million tracking requests from customers per day. The company stores over 16 petabytes of data.

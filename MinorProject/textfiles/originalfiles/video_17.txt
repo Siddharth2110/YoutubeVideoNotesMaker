@@ -1,0 +1,49 @@
+Tip 3: Do Algorithm Analysis
+Once you have designed an algorithm to solve a particular problem in a programming contest,
+you must then ask this question: Given the maximum input bound (usually given in a good
+problem description), can the currently developed algorithm, with its time/space complexity,
+pass the time/memory limit given for that particular problem?
+Sometimes, there are more than one way to attack a problem. Some approaches may be
+incorrect, others not fast enough, and yet others ‘overkill’. A good strategy is to brainstorm
+for many possible algorithms and then pick the simplest solution that works (i.e. is fast
+enough to pass the time and memory limit and yet still produce the correct answer)4!
+Modern computers are quite fast and can process5 up to ≈ 100M (or 108; 1M = 1, 000, 000)
+operations in a few seconds. You can use this information to determine if your algorithm will
+run in time. For example, if the maximum input size n is 100K (or 105; 1K = 1, 000), and
+your current algorithm has a time complexity of O(n2), common sense (or your calculator)
+will inform you that (100K)2 or 1010 is a very large number that indicates that your algorithm
+will require (on the order of) hundreds of seconds to run. You will thus need to devise
+a faster (and also correct) algorithm to solve the problem. Suppose you find one that runs
+with a time complexity of O(n log2 n). Now, your calculator will inform you that 105 log2 105
+is just 1.7 × 106 and common sense dictates that the algorithm (which should now run in
+under a second) will likely be able to pass the time limit.
+The problem bounds are as important as your algorithm’s time complexity in determining
+if your solution is appropriate. Suppose that you can only devise a relatively-simple-to-code
+algorithm that runs with a horrendous time complexity of O(n4). This may appear to be
+an infeasible solution, but if n ≤ 50, then you have actually solved the problem. You can
+implement your O(n4) algorithm with impunity since 504 is just 6.25M and your algorithm
+should still run in around a second.
+Note, however, that the order of complexity does not necessarily indicate the actual
+number of operations that your algorithm will require. If each iteration involves a large
+number of operations (many floating point calculations, or a significant number of constant
+sub-loops), or if your implementation has a high ‘constant‘ in its execution (unnecessarily
+repeated loops or multiple passes, or even I/O or execution overhead), your code may take
+longer to execute than expected. However, this will usually not be the case as the problem
+authors should have designed the time limits so that a well-coded algorithm with a suitable
+time complexity will achieve an AC verdict.
+By analyzing the complexity of your algorithm with the given input bound and the stated
+time/memory limit, you can better decide whether you should attempt to implement your
+algorithm (which will take up precious time in the ICPCs and IOIs), attempt to improve
+your algorithm first, or switch to other problems in the problem set.
+• Basic time and space complexity analysis for iterative and recursive algorithms:
+– An algorithm with k-nested loops of about n iterations each has O(nk) complexity.
+– If your algorithm is recursive with b recursive calls per level and has L levels, the
+algorithm has roughly O(bL) complexity, but this is a only a rough upper bound.
+The actual complexity depends on what actions are done per level and whether
+pruning is possible.
+– A Dynamic Programming algorithm or other iterative routine which processes a
+2D n × n matrix in O(k) per cell runs in O(k × n2) time. This is explained in
+further detail in Section 3.5.
+• More advanced analysis techniques:
+– Prove the correctness of an algorithm (especially for Greedy algorithms in Section
+3.4), to minimize your chance of getting the ‘Wrong Answer’ verdict.

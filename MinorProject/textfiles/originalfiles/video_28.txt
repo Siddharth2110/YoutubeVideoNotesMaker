@@ -1,0 +1,61 @@
+With Adjacency Lists, we can also enumerate the list of neighbors of a vertex v efficiently.
+If v has k neighbors, the enumeration will require O(k) time. Since this is one of the
+most common operations in most graph algorithms, it is advisable to use Adjacency
+Lists as your first choice of graph representation. Unless otherwise stated, most graph
+algorithms discussed in this book use the Adjacency List.
+C). The Edge List, usually in the form of a vector of triples (see Figure 2.4).
+Using the C++ STL: vector< pair<int, ii> > EdgeList.
+Using the Java API: Vector< IntegerTriple > EdgeList.
+IntegerTriple is a class that contains a triple of integers like pair<int, ii> above.
+In the Edge List, we store a list of all E edges, usually in some sorted order. For
+directed graphs, we can store a bidirectional edge twice, one for each direction. The
+space complexity is clearly O(E). This graph representation is very useful for Kruskal’s
+algorithm for MST (Section 4.3.2), where the collection of undirected edges need to
+be sorted23 by ascending weight. However, storing graph information in Edge List
+complicates many graph algorithms that require the enumeration of edges incident to a
+vertex.
+Implicit Graph
+Some graphs do not have to be stored in a graph data structure or explicitly generated for
+the graph to be traversed or operated upon. Such graphs are called implicit graphs. You
+will encounter them in the subsequent chapters. Implicit graphs can come in two flavours:
+1. The edges can be determined easily.
+Example 1: Navigating a 2D grid map (see Figure 2.5.A). The vertices are the cells in
+the 2D character grid where ‘.’ represents land and ‘#’ represents an obstacle. The
+edges can be determined easily: There is an edge between two neighboring cells in the grid if they share an N/S/E/W border and if both are ‘.’ (see Figure 2.5.B).
+Example 2: The graph of chess knight movements on an 8×8 chessboard. The vertices
+are the cells in the chessboard. Two squares in the chessboard have an edge between
+them if they differ by two squares horizontally and one square vertically (or two squares
+vertically and one square horizontally). The first three rows and four columns of a
+chessboard are shown in Figure 2.5.C (many other vertices and edges are not shown).
+The edges can be determined with some rules.
+Example: A graph contains N vertices ([1..N]). There is an edge between two vertices
+i and j if (i+j) is a prime. See Figure 2.5.D that shows such a graph with N = 5 and
+several more examples in Section 8.2.3.
+Union-Find Disjoint Sets
+The Union-Find Disjoint Set (UFDS) is a data structure to model a collection of disjoint sets
+with the ability to efficiently24—in ≈ O(1)—determine which set an item belongs to (or to
+test whether two items belong to the same set) and to unite two disjoint sets into one larger
+set. Such data structure can be used to solve the problem of finding connected components
+in an undirected graph (Section 4.2.3). Initialize each vertex to a separate disjoint set, then
+enumerate the graph’s edges and join every two vertices/disjoint sets connected by an edge.
+We can then test if two vertices belong to the same component/set easily.
+These seemingly simple operations are not efficiently supported by the C++ STL set
+(and Java TreeSet), which is not designed for this purpose. Having a vector of sets and
+looping through each one to find which set an item belongs to is expensive! C++ STL
+set union (in algorithm) will not be efficient enough although it combines two sets in
+linear time as we still have to deal with shuffling the contents of the vector of sets! To
+support these set operations efficiently, we need a better data structure—the UFDS.
+The main innovation of this data structure is in choosing a representative ‘parent’ item
+to represent a set. If we can ensure that each set is represented by only one unique item,
+then determining if items belong to the same set becomes far simpler: The representative
+‘parent’ item can be used as a sort of identifier for the set. To achieve this, the Union-Find
+Disjoint Set creates a tree structure where the disjoint sets form a forest of trees. Each tree
+corresponds to a disjoint set. The root of the tree is determined to be the representative
+item for a set. Thus, the representative set identifier for an item can be obtained simply
+by following the chain of parents to the root of the tree, and since a tree can only have one
+root, this representative item can be used as a unique identifier for the set.
+To do this efficiently, we store the index of the parent item and (the upper bound of)
+the height of the tree of each set (vi p and vi rank in our implementation). Remember
+that vi is our shortcut for a vector of integers. p[i] stores the immediate parent of item i.
+If item i is the representative item of a certain disjoint set, then p[i] = i, i.e. a self-loop.
+rank[i] yields (the upper bound of) the height of the tree rooted at item i.

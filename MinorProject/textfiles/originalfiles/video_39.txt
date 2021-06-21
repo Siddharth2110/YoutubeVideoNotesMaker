@@ -1,0 +1,60 @@
+Greedy
+An algorithm is said to be greedy if it makes the locally optimal choice at each step with the
+hope of eventually reaching the globally optimal solution. In some cases, greedy works—the
+solution is short and runs efficiently. For many others, however, it does not. As discussed
+in other typical Computer Science textbooks, e.g. [7, 38], a problem must exhibit these two
+properties in order for a greedy algorithm to work:
+1. It has optimal sub-structures.
+Optimal solution to the problem contains optimal solutions to the sub-problems.
+2. It has the greedy property (difficult to prove in time-critical contest environment!).
+If we make a choice that seems like the best at the moment and proceed to solve the
+remaining subproblem, we reach the optimal solution. We will never have to reconsider
+our previous choices.
+3.4.1 Examples
+Coin Change - The Greedy Version
+Problem description: Given a target amount V cents and a list of denominations of n coins,
+i.e. we have coinValue[i] (in cents) for coin types i ∈ [0..n-1], what is the minimum
+number of coins that we must use to represent amount V ? Assume that we have an unlimited
+supply of coins of any type. Example: If n = 4, coinValue = {25, 10, 5, 1} cents6, and
+we want to represent V = 42 cents, we can use this Greedy algorithm: Select the largest
+coin denomination which is not greater than the remaining amount, i.e. 42-25 = 17 → 17-10
+= 7 → 7-5 = 2 → 2-1 = 1 → 1-1 = 0, a total of 5 coins. This is optimal.
+The problem above has the two ingredients required for a successful greedy algorithm:
+1. It has optimal sub-structures.
+We have seen that in our quest to represent 42 cents, we used 25+10+5+1+1.
+This is an optimal 5-coin solution to the original problem!
+Optimal solutions to sub-problem are contained within the 5-coin solution, i.e.
+a. To represent 17 cents, we can use 10+5+1+1 (part of the solution for 42 cents),
+b. To represent 7 cents, we can use 5+1+1 (also part of the solution for 42 cents), etc
+2. It has the greedy property: Given every amount V , we can greedily subtract from it
+the largest coin denomination which is not greater than this amount V. It can be
+proven (not shown here for brevity) that using any other strategies will not lead to an
+optimal solution, at least for this set of coin denominations.
+However, this greedy algorithm does not work for all sets of coin denominations. Take for
+example {4, 3, 1} cents. To make 6 cents with that set, a greedy algorithm would choose 3
+coins {4, 1, 1} instead of the optimal solution that uses 2 coins {3, 3}. The general version
+of this problem is revisited later in Section 3.5.2 (Dynamic Programming).
+Remarks About Greedy Algorithm in Programming Contests
+In this section, we have discussed three classical problems solvable with Greedy algorithms:
+Coin Change (the special case), Load Balancing, and Interval Covering. For these classical
+problems, it is helpful to memorize their solutions (for this case, ignore that we have said
+earlier in the chapter about not relying too much on memorization). We have also discussed
+an important problem solving strategy usually applicable to greedy problems: Sorting the
+input data to elucidate hidden greedy strategies.
+There are two other classical examples of Greedy algorithms in this book, e.g. Kruskal’s
+(and Prim’s) algorithm for the Minimum Spanning Tree (MST) problem (see Section 4.3)
+and Dijkstra’s algorithm for the Single-Source Shortest Paths (SSSP) problem (see Section
+4.4.3). There are many more known Greedy algorithms that we have chosen not to discuss
+in this book as they are too ‘problem specific’ and rarely appear in programming contests,
+e.g. Huffman Codes [7, 38], Fractional Knapsack [7, 38], some Job Scheduling problems, etc.
+However, today’s programming contests (both ICPC and IOI) rarely involve the purely
+canonical versions of these classical problems. Using Greedy algorithms to attack a ‘non
+classical’ problem is usually risky. A Greedy algorithm will normally not encounter the TLE
+response as it is often lightweight, but instead tends to obtain WA verdicts. Proving that a
+certain ‘non-classical’ problem has optimal sub-structure and greedy property during contest
+time may be difficult or time consuming, so a competitive programmer should usually use
+this rule of thumb:
+If the input size is ‘small enough’ to accommodate the time complexity of either Complete
+Search or Dynamic Programming approaches (see Section 3.5), then use these approaches
+as both will ensure a correct answer. Only use a Greedy algorithm if the input size given in
+the problem statement are too large even for the best Complete Search or DP algorithm.

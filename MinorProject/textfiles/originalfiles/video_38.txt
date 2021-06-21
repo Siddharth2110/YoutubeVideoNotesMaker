@@ -1,0 +1,56 @@
+Binary Search on Uncommon Data Structures
+This original problem is titled ‘My Ancestor’ and was used in the Thailand ICPC National
+Contest 2009. Abridged problem description: Given a weighted (family) tree of up to N ≤
+80K vertices with a special trait: Vertex values are increasing from root to leaves. Find
+the ancestor vertex closest to the root from a starting vertex v that has weight at least P.
+There are up to Q ≤ 20K such offline queries. Examine Figure 3.3 (left). If P = 4, then
+the answer is the vertex labeled with ‘B’ with value 5 as it is the ancestor of vertex v that
+is closest to root ‘A’ and has a value of ≥ 4. If P = 7, then the answer is ‘C’, with value 7.
+If P ≥ 9, there is no answer.
+The na¨ıve solution is to perform a linear O(N) scan per query: Starting from the given
+vertex v, we move up the (family) tree until we reach the first vertex whose direct parent
+has value < P or until we reach the root. If this vertex has value ≥ P and it is not vertex v itself, we have found the solution. As there are Q queries, this approach runs in O(QN) (the
+input tree can be a sorted linked list, or rope, of length N) and will get a TLE as N ≤ 80K
+and Q ≤ 20K.
+A better solution is to store all the 20K queries (we do not have to answer them immediately).
+Traverse the tree just once starting from the root using the O(N) preorder
+tree traversal algorithm (Section 4.7.2). This preorder tree traversal is slightly modified to
+remember the partial root-to-current-vertex sequence as it executes. The array is always
+sorted because the vertices along the root-to-current-vertex path have increasing weights,
+see Figure 3.3 (right). The preorder tree traversal on the tree shown in Figure 3.3 (left)
+produces the following partial root-to-current-vertex sorted array: {{3}, {3, 5}, {3, 5, 7},
+{3, 5, 7, 8}, backtrack, {3, 5, 7, 9}, backtrack, backtrack, backtrack, {3, 8}, backtrack,
+{3, 6}, {3, 6, 20}, backtrack, {3, 6, 10}, and finally {3, 6, 10, 20}, backtrack, backtrack,
+backtrack (done)}.
+During the preorder traversal, when we land on a queried vertex, we can perform a
+O(logN) binary search (to be precise: lower bound) on the partial root-to-current-vertex
+weight array to obtain the ancestor closest to the root with a value of at least P, recording
+these solutions. Finally, we can perform a simple O(Q) iteration to output the results. The
+overall time complexity of this approach is O(QlogN), which is now manageable given the
+input bounds.
+Bisection Method
+We have discussed the applications of Binary Searches in finding items in static sorted
+sequences. However, the binary search principle4 can also be used to find the root of a
+function that may be difficult to compute directly.
+Example: You buy a car with loan and now want to pay the loan in monthly installments
+of d dollars for m months. Suppose the value of the car is originally v dollars and the bank
+charges an interest rate of i% for any unpaid loan at the end of each month. What is the
+amount of money d that you must pay per month (to 2 digits after the decimal point)?
+Suppose d = 576.19, m = 2, v = 1000, and i = 10%. After one month, your debt
+becomes 1000 × (1.1) − 576.19 = 523.81. After two months, your debt becomes 523.81 ×
+(1.1) − 576.19 ≈ 0. If we are only given m = 2, v = 1000, and i = 10%, how would we
+determine that d = 576.19? In other words, find the root d such that the debt payment
+function f(d,m, v, i) ≈ 0.
+Binary Search the Answer
+The abridged version of UVa 11935 - Through the Desert is as follows: Imagine that you are
+an explorer trying to cross a desert. You use a jeep with a ‘large enough’ fuel tank – initially
+full. You encounter a series of events throughout your journey such as ‘drive (that consumes
+fuel)’, ‘experience gas leak (further reduces the amount of fuel left)’, ‘encounter gas station
+(allowing you to refuel to the original capacity of your jeep’s fuel tank)’, ‘encounter mechanic
+(fixes all leaks)’, or ‘reach goal (done)’. You need to determine the smallest possible fuel
+tank capacity for your jeep to be able to reach the goal. The answer must be precise to three
+digits after decimal point.
+If we know the jeep’s fuel tank capacity, then this problem is just a simulation problem.
+From the start, we can simulate each event in order and determine if the goal can be reached
+without running out of fuel. The problem is that we do not know the jeep’s fuel tank
+capacity—this is the value that we are looking for.

@@ -1,0 +1,80 @@
+Hash Table: C++11 STL unordered map18 (and Java HashMap/HashSet/HashTable)
+The Hash Table is another non-linear data structure, but we do not recommend using
+it in programming contests unless absolutely necessary. Designing a well-performing
+hash function is often tricky and only the new C++11 has STL support for it (Java
+has Hash-related classes).
+Moreover, C++ STL maps or sets (and Java TreeMaps or TreeSets) are usually fast
+enough as the typical input size of (programming contest) problems is usually not more
+than 1M. Within these bounds, the O(1) performance of Hash Tables and O(log 1M)
+performance for balanced BSTs do not differ by much. Thus, we do not discuss Hash
+Tables in detail in this section.
+However, a simple form of Hash Tables can be used in programming contests. ‘Direct
+Addressing Tables’ (DATs) can be considered to be Hash Tables where the keys
+themselves are the indices, or where the ‘hash function’ is the identity function. For
+example, we may need to assign all possible ASCII characters [0-255] to integer values,
+e.g. ‘a’ → ‘3’, ‘W’ → ‘10’, . . . , ‘I’ → ‘13’. For this purpose, we do not need the C++
+STL map or any form of hashing as the key itself (the value of the ASCII character) is
+unique and sufficient to determine the appropriate index in an array of size 256. Some
+programming exercises involving DATs are listed in the previous Section 2.2.
+Data Structures with Our Own Libraries
+As of 24 May 2013, important data structures shown in this section do not have built-in
+support yet in C++ STL or Java API. Thus, to be competitive, contestants should prepare
+bug-free implementations of these data structures. In this section, we discuss the key ideas
+and example implementations (see the given source code too) of these data structures.
+Graph
+The graph is a pervasive structure which appears in many Computer Science problems. A
+graph (G = (V,E)) in its basic form is simply a set of vertices (V ) and edges (E; storing
+connectivity information between vertices in V ). Later in Chapter 3, 4, 8, and 9, we will
+explore many important graph problems and algorithms. To prepare ourselves, we will
+discuss three basic ways (there are a few other rare structures) to represent a graph G with
+V vertices and E edges in this subsection20.
+A). The Adjacency Matrix, usually in the form of a 2D array (see Figure 2.4).
+In (programming contest) problems involving graphs, the number of vertices V is usually
+known. Thus we can build a ‘connectivity table’ by creating a static 2D array: int
+AdjMat[V ][V ]. This has an O(V 2) space21 complexity. For an unweighted graph, set
+AdjMat[i][j] to a non-zero value (usually 1) if there is an edge between vertex i-j or
+zero otherwise. For a weighted graph, set AdjMat[i][j] = weight(i,j) if there is an
+edge between vertex i-j with weight(i,j) or zero otherwise. Adjacency Matrix cannot
+be used to store multigraph. For a simple graph without self-loops, the main diagonal
+of the matrix contains only zeroes, i.e. AdjMat[i][i] = 0, ∀i ∈ [0..V-1].
+An Adjacency Matrix is a good choice if the connectivity between two vertices in a
+small dense graph is frequently required. However, it is not recommended for large
+sparse graphs as it would require too much space (O(V 2)) and there would be many
+blank (zero) cells in the 2D array. In a competitive setting, it is usually infeasible to
+use Adjacency Matrices when the given V is larger than ≈ 1000. Another drawback
+of Adjacency Matrix is that it also takes O(V ) time to enumerate the list of neighbors
+of a vertex v—an operation common to many graph algorithms—even if a vertex only
+has a handful of neighbors. A more compact and efficient graph representation is the
+Adjacency List discussed below.
+A). The Adjacency Matrix, usually in the form of a 2D array (see Figure 2.4).
+In (programming contest) problems involving graphs, the number of vertices V is usually
+known. Thus we can build a ‘connectivity table’ by creating a static 2D array: int
+AdjMat[V ][V ]. This has an O(V 2) space21 complexity. For an unweighted graph, set
+AdjMat[i][j] to a non-zero value (usually 1) if there is an edge between vertex i-j or
+zero otherwise. For a weighted graph, set AdjMat[i][j] = weight(i,j) if there is an
+edge between vertex i-j with weight(i,j) or zero otherwise. Adjacency Matrix cannot
+be used to store multigraph. For a simple graph without self-loops, the main diagonal
+of the matrix contains only zeroes, i.e. AdjMat[i][i] = 0, ∀i ∈ [0..V-1].
+An Adjacency Matrix is a good choice if the connectivity between two vertices in a
+small dense graph is frequently required. However, it is not recommended for large
+sparse graphs as it would require too much space (O(V 2)) and there would be many
+blank (zero) cells in the 2D array. In a competitive setting, it is usually infeasible to
+use Adjacency Matrices when the given V is larger than ≈ 1000. Another drawback
+of Adjacency Matrix is that it also takes O(V ) time to enumerate the list of neighbors
+of a vertex v—an operation common to many graph algorithms—even if a vertex only
+has a handful of neighbors. A more compact and efficient graph representation is the
+Adjacency List discussed below.
+B). The Adjacency List, usually in the form of a vector of vector of pairs (see Figure 2.4).
+Using the C++ STL: vector<vii> AdjList, with vii defined as in:
+typedef pair<int, int> ii; typedef vector<ii> vii; // data type shortcuts
+Using the Java API: Vector< Vector < IntegerPair > > AdjList.
+IntegerPair is a simple Java class that contains a pair of integers like ii above.
+In Adjacency Lists, we have a vector of vector of pairs, storing the list of neighbors
+of each vertex u as ‘edge information’ pairs. Each pair contains two pieces of information,
+the index of the neighbouring vertex and the weight of the edge. If the graph is
+unweighted, simply store the weight as 0, 1, or drop the weight attribute22 entirely. The
+space complexity of Adjacency List is O(V + E) because if there are E bidirectional
+edges in a (simple) graph, this Adjacency List will only store 2E ‘edge information’
+pairs. As E is usually much smaller than V ×(V −1)/2 = O(V 2)—the maximum number
+of edges in a complete (simple) graph, Adjacency Lists are often more space-efficient
+than Adjacency Matrices. Note that Adjacency List can be used to store multigraph.

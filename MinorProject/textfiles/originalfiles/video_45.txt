@@ -1,0 +1,68 @@
+This graph traversal behavior can be implemented easily with the recursive code below.
+Our DFS implementation uses the help of a global vector of integers: vi dfs_num to distinguish
+the state of each vertex. For the simplest DFS implementation, we only use vi dfs_num
+to distinguish between ‘unvisited’ (we use a constant value UNVISITED = -1) and ‘visited’
+(we use another constant value VISITED = 1). Initially, all values in dfs_num are set to
+‘unvisited’. We will use vi dfs_num for other purposes later. Calling dfs(u) starts DFS
+from a vertex u, marks vertex u as ‘visited’, and then DFS recursively visits each ‘unvisited’
+neighbor v of u (i.e. edge u − v exists in the graph and dfs_num[v] == UNVISITED).
+The time complexity of this DFS implementation depends on the graph data structure used.
+In a graph with V vertices and E edges, DFS runs in O(V + E) and O(V 2) if the graph is
+stored as Adjacency List and Adjacency Matrix, respectively.
+On the sample graph in Figure 4.1, dfs(0)—calling
+DFS from a starting vertex u = 0—will trigger this
+sequence of visitation: 0 → 1 → 2 → 3 → 4. This
+sequence is ‘depth-first’, i.e. DFS goes to the deepest
+possible vertex from the start vertex before attempting
+another branch (there is none in this case).
+Note that this sequence of visitation depends very
+much on the way we order the neighbors of a vertex1,
+i.e. the sequence 0 → 1 → 3 → 2 (backtrack to 3) → 4
+is also a possible visitation sequence.
+Also notice that one call of dfs(u) will only visit all vertices that are connected to vertex
+u. That is why vertices 5, 6, 7, and 8 in Figure 4.1 remain unvisited after calling dfs(0).
+The DFS code shown here is very similar to the recursive backtracking code shown earlier
+in Section 3.2. If we compare the pseudocode of a typical backtracking code (replicated
+below) with the DFS code shown above, we can see that the main difference is the flagging
+of visited vertices (states). Backtracking (automatically) un-flag visited vertices (reset the
+state to previous state) when the recursion backtracks to allow re-visitation of those vertices
+(states) from another branch. By not revisiting vertices of a general graph (via dfs_num
+checks), DFS runs in O(V + E), but the time complexity of backtracking is exponential.
+Breadth First Search (BFS)
+Breadth First Search—abbreviated as BFS—is another graph traversal algorithm. Starting
+from a distinguished source vertex, BFS will traverse the graph ‘breadth-first’. That is, BFS
+will visit vertices that are direct neighbors of the source vertex (first layer), neighbors of
+direct neighbors (second layer), and so on, layer by layer.
+BFS starts with the insertion of the source vertex s into a queue, then processes the queue
+as follows: Take out the front most vertex u from the queue, enqueue all unvisited neighbors
+of u (usually, the neighbors are ordered based on their vertex numbers), and mark them as
+visited. With the help of the queue, BFS will visit vertex s and all vertices in the connected
+component that contains s layer by layer. BFS algorithm also runs in O(V +E) and O(V 2) on a graph represented using an Adjacency List and Adjacency Matrix, respectively (again,
+see Exercise 4.2.2.2).
+Implementing BFS is easy if we utilize C++ STL or Java API. We use queue to order
+the sequence of visitation and vector<int> (or vi) to record if a vertex has been visited or
+not—which at the same time also record the distance (layer number) of each vertex from
+the source vertex. This distance computation feature is used later to solve a special case of
+Single-Source Shortest Paths problem (see Section 4.4 and 8.2.3).
+Finding Connected Components (Undirected Graph)
+DFS and BFS are not only useful for traversing a graph. They can be used to solve many
+other graph problems. The first few problems below can be solved with either DFS or BFS
+although some of the last few problems are more suitable for DFS only.
+The fact that one single call of dfs(u) (or bfs(u)) will only visit vertices that are actually
+connected to u can be utilized to find (and to count the number of) connected components
+in an undirected graph (see further below in Section 4.2.9 for a similar problem on directed
+graph). We can simply use the following code to restart DFS (or BFS) from one of the
+remaining unvisited vertices to find the next connected component. This process is repeated
+until all vertices have been visited and has an overall time complexity of O(V + E).
+Flood Fill - Labeling/Coloring the Connected Components
+DFS (or BFS) can be used for other purposes than just finding (and counting the number
+of) connected components. Here, we show how a simple tweak of the O(V + E) dfs(u) (we
+can also use bfs(u)) can be used to label (also known in CS terminology as ‘to color’) and
+count the size of each component. This variant is more famously known as ‘flood fill’ and
+usually performed on implicit graphs (usually 2D grids).
+Let’s see an example below (UVa 469 - Wetlands of Florida). The implicit graph is a 2D grid
+where the vertices are the cells in the grid and the edges are the connections between a cell
+and its S/SE/E/NE/N/NW/W/SW cells. ‘W’ denotes a wet cell and ‘L’ denotes a land cell.
+Wet area is defined as connected cells labeled with ‘W’. We can label (and simultaneously
+count the size of) a wet area by using floodfill. The example below shows an execution of
+floodfill from row 2, column 1 (0-based indexing), replacing ‘W’ to ‘.’.

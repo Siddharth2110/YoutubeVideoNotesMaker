@@ -1,0 +1,65 @@
+However, many programming problems do have better-than-Complete-Search solutions as
+illustrated in the Section 3.1. Thus a Complete Search solution may receive a Time Limit
+Exceeded (TLE) verdict. With proper analysis, you can determine the likely outcome (TLE
+versus AC) before attempting to code anything (Table 1.4 in Section 1.2.3 is a good starting
+point). If a Complete Search is likely to pass the time limit, then go ahead and implement
+one. This will then give you more time to work on harder problems in which Complete
+Search will be too slow.
+In IOI, you will usually need better problem solving techniques as Complete Search
+solutions are usually only rewarded with very small fractions of the total score in the subtask
+scoring schemes. Nevertheless, Complete Search should be used when you cannot come up
+with a better solution—it will at least enable you to score some marks.
+Sometimes, running Complete Search on small instances of a challenging problem can
+help us to understand its structure through patterns in the output (it is possible to visualize
+the pattern for some problems) that can be exploited to design a faster algorithm. Some
+combinatorics problems in Section 5.4 can be solved this way. Then, the Complete Search
+solution can also act as a verifier for small instances, providing an additional check for the
+faster but non-trivial algorithm that you develop.
+After reading this section, you may have the impression that Complete Search only works
+for ‘easy problems’ and it is usually not the intended solution for ‘harder problems’. This is
+not entirely true. There exist hard problems that are only solvable with creative Complete
+Search algorithms. We have reserved those problems for Section 8.2.
+In the next two sections, we give several (easier) examples of this simple yet possibly
+challenging paradigm. In Section 3.2.1, we give examples that are implemented iteratively.
+In Section 3.2.2, we give examples on solutions that are implemented recursively (with backtracking).
+Finally, in Section 3.2.3, we provide a few tips to give your solution, especially
+your Complete Search solution, a better chance to pass the required Time Limit.
+Iterative Complete Search
+Iterative Complete Search (Two Nested Loops: UVa 725 - Division)
+Abridged problem statement: Find and display all pairs of 5-digit numbers that collectively
+use the digits 0 through 9 once each, such that the first number divided by the second is
+equal to an integer N, where 2 ≤ N ≤ 79. That is, abcde / fghij = N, where each letter
+represents a different digit. The first digit of one of the numbers is allowed to be zero, e.g.
+for N = 62, we have 79546 / 01283 = 62; 94736 / 01528 = 62.
+Quick analysis shows that fghij can only range from 01234 to 98765 which is at most
+≈ 100K possibilities. An even better bound for fghij is the range 01234 to 98765 / N,
+which has at most ≈ 50K possibilities for N = 2 and becomes smaller with increasing N. For
+each attempted fghij, we can get abcde from fghij * N and then check if all 10 digits are
+different. This is a doubly-nested loop with a time complexity of at most ≈ 50K×10 = 500K
+operations per test case. This is small. Thus, an iterative Complete Search is feasible. The
+main part of the code is shown below (we use a fancy bit manipulation trick shown in Section
+2.2 to determine digit uniqueness):
+Iterative Complete Search (Many Nested Loops: UVa 441 - Lotto)
+In programming contests, problems that are solvable with a single loop are usually considered
+easy. Problems which require doubly-nested iterations like UVa 725 - Division above are more
+challenging but they are not necessarily considered difficult. Competitive programmers must
+be comfortable writing code with more than two nested loops.
+Let’s take a look at UVa 441 which can be summarized as follows: Given 6 < k < 13
+integers, enumerate all possible subsets of size 6 of these integers in sorted order.
+Since the size of the required subset is always 6 and the output has to be sorted lexicographically
+(the input is already sorted), the easiest solution is to use six nested loops as
+shown below. Note that even in the largest test case when k = 12, these six nested loops
+will only produce 12C6 = 924 lines of output. This is small.
+Iterative Complete Search (Loops + Pruning: UVa 11565 - Simple Equations)
+Abridged problem statement: Given three integers A, B, and C (1 ≤ A,B,C ≤ 10000),
+find three other distinct integers x, y, and z such that x + y + z = A, x × y × z = B, and
+x2 + y2 + z2 = C.
+The third equation x2 + y2 + z2 = C is a good starting point. Assuming that C has
+the largest value of 10000 and y and z are one and two (x, y, z have to be distinct), then
+the possible range of values for x is [−100 . . . 100]. We can use the same reasoning to get a
+similar range for y and z. We can then write the following triply-nested iterative solution
+below that requires 201 × 201 × 201 ≈ 8M operations per test case.
+Notice the way a short circuit AND was used to speed up the solution by enforcing a
+lightweight check on whether x, y, and z are all different before we check the three formulas.
+The code shown above already passes the required time limit for this problem, but we can
+do better. 

@@ -1,0 +1,61 @@
+5. Though this is rare in modern programming contests, do not assume that the input
+will always be nicely formatted if the problem description does not explicitly state it
+(especially for a badly written problem). Try inserting additional whitespace (spaces,
+tabs) in the input and test if your code is still able to obtain the values correctly
+without crashing.
+However, after carefully following all these steps, you may still get non-AC verdicts. In
+ICPC, you (and your team) can actually consider the judge’s verdict and the leader board
+(usually available for the first four hours of the contest) in determining your next course of
+action. In IOI 2010-2012, contestants have a limited number of tokens to use for checking
+the correctness of their submitted code against the secret test cases. With more experience
+in such contests, you will be able to make better judgments and choices.
+Tip 6: Practice and More Practice
+Competitive programmers, like real athletes, must train regularly and keep ‘programmingfit’.
+Thus in our second last tip, we provide a list of several websites with resources that
+can help improve your problem solving skill. We believe that success comes as a result of a
+continuous effort to better yourself.
+The University of Valladolid (UVa, from Spain) Online Judge [47] contains past ACM
+contest problems (Locals, Regionals, and up to World Finals) plus problems from other
+sources, including various problems from contests hosted by UVa. You can solve these
+problems and submit your solutions to the Online Judge. The correctness of your program
+will be reported as soon as possible. Try solving the problems mentioned in this book and
+you might see your name on the top-500 authors rank list someday :-).
+As of 24 May 2013, one needs to solve ≥ 542 problems to be in the top-500. Steven is
+ranked 27 (for solving 1674 problems) while Felix is ranked 37 (for solving 1487 problems)
+out of ≈ 149008 UVa users (and a total of ≈ 4097 problems).
+UVa’s ‘sister’ online judge is the ACM ICPC Live Archive [33] that contains almost all
+recent ACM ICPC Regionals and World Final problem sets since year 2000. Train here if
+you want to do well in future ICPCs. Note that in October 2011, about hundreds of Live
+Archive problems (including the ones listed in the second edition of this book) are mirrored
+in the UVa Online Judge.
+TopCoder arranges frequent ‘Single Round Match’ (SRM) [32] that consists of a few problems
+to be solved in 1-2 hours. After the contest, you are given the chance to ‘challenge’ other
+contestants code by supplying tricky test cases. This online judge uses a rating system (red,
+yellow, blue, etc coders) to reward contestants who are really good at problem solving with a
+higher rating as opposed to more diligent contestants who happen to solve a higher number
+of easier problems.
+Tip 7: Team Work (for ICPC)
+This last tip is not something that is easy to teach, but here are some ideas that may be
+worth trying for improving your team’s performance:
+• Practice coding on blank paper. (This is useful when your teammate is using the
+computer. When it is your turn to use the computer, you can then just type the code
+as fast as possible rather than spending time thinking in front of the computer.)
+• The ‘submit and print’ strategy: If your code gets an AC verdict, ignore the printout.
+If it still is not AC, debug your code using that printout (and let your teammate uses
+the computer for other problem). Beware: Debugging without the computer is not an
+easy skill to master.
+• If your teammate is currently coding his algorithm, prepare challenges for his code by
+preparing hard corner-case test data (hopefully his code passes all those).
+• The X-factor: Befriend your teammates outside of training sessions and contests.
+Getting Started: The Easy Problems
+Note: You can skip this section if you are a veteran participant of programming contests.
+This section is meant for readers who are new with competitive programming.
+Anatomy of a Programming Contest Problem
+A programming contest problem usually contains the following components:
+• Background story/problem description. Usually, the easier problems are written
+to deceive contestants and made to appear difficult, for example by adding ‘extra
+information’ to create a diversion. Contestants should be able to filter out these unimportant details and focus on the essential ones. For example, the entire opening
+paragraphs except the last sentence in UVa 579 - ClockHands are about the history of
+the clock and is completely unrelated to the actual problem. However, harder problems
+are usually written as succinctly as possible—they are already difficult enough without
+additional embellishment.

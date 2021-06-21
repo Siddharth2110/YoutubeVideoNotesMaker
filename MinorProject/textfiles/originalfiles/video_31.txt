@@ -1,0 +1,55 @@
+The cumulative frequency table can also be used as a solution to the Range Sum Query
+(RSQ) problem mentioned in Exercise 2.4.3.2*. It stores RSQ(1, i) ∀i ∈ [1..n] where
+n is the largest integer index/score30. In the example above, we have n = 10, RSQ(1, 1)
+= 0, RSQ(1, 2) = 1, . . . , RSQ(1, 6) = 7, . . . , RSQ(1, 8) = 10, . . . , and RSQ(1, 10) =
+11. We can then obtain the answer to the RSQ for an arbitrary range RSQ(i, j) when
+i = 1 by subtracting RSQ(1, j) - RSQ(1, i - 1). For example, RSQ(4, 6) = RSQ(1, 6)
+- RSQ(1, 3) = 7 - 1 = 6.
+If the frequencies are static, then the cumulative frequency table as in Table 2.1 can
+be computed efficiently with a simple O(n) loop. First, set cf[1] = f[1]. Then, for i ∈
+[2..n], compute cf[i] = cf[i - 1] + f[i]. This will be discussed further in Section
+3.5.2. However, when the frequencies are frequently updated (increased or decreased) and
+the RSQs are frequently asked afterwards, it is better to use a dynamic data structure.
+Instead of using a Segment Tree to implement a dynamic cumulative frequency table,
+we can implement the far simpler Fenwick Tree instead (compare the source code for both
+implementations, provided in this section and in the previous Section 2.4.3). This is perhaps
+one of the reasons why the Fenwick Tree is currently included in the IOI syllabus [20]. Fenwick
+Tree operations are also extremely efficient as they use fast bit manipulation techniques
+(see Section 2.2).
+In this section, we will use the function LSOne(i) (which is actually (i & (-i))) extensively,
+naming it to match its usage in the original paper [18]. In Section 2.2, we have seen
+that the operation (i & (-i)) produces the first Least Significant One-bit in i.
+The Fenwick Tree is typically implemented as an array (we use a vector for size flexibility).
+The Fenwick Tree is a tree that is indexed by the bits of its integer keys. These integer
+keys fall within the fixed range [1..n]—skipping31 index 0. In a programming contest environment,
+n can approach ≈ 1M so that the Fenwick Tree covers the range [1..1M]—large
+enough for many practical (contest) problems. In Table 2.1 above, the scores [1..10] are
+the integer keys in the corresponding array with size n = 10 and m = 11 data points.
+Let the name of the Fenwick Tree array be ft. Then, the element at index i is responsible
+for elements in the range [i-LSOne(i)+1..i] and ft[i] stores the cumulative frequency
+of elements {i-LSOne(i)+1, i-LSOne(i)+2, i-LSOne(i)+3, .., i}. In Figure 2.11, the
+value of ft[i] is shown in the circle above index i and the range [i-LSOne(i)+1..i] is
+shown as a circle and a bar (if the range spans more than one index) above index i. We can
+see that ft[4] = 2 is responsible for range [4-4+1..4] = [1..4], ft[6] = 5 is responsible
+for range [6-2+1..6] = [5..6], ft[7] = 2 is responsible for range [7-1+1..7] = [7..7],
+ft[8] = 10 is responsible for range [8-8+1..8] = [1..8] etc32.
+With such an arrangement, if we want to obtain the cumulative frequency between
+[1..b], i.e. rsq(b), we simply add ft[b], ft[b’], ft[b’’], . . . until index bi is 0. This
+sequence of indices is obtained via subtracting the Least Significant One-bit via the bit manipulation
+expression: b’ = b - LSOne(b). Iteration of this bit manipulation effectively
+strips off the least significant one-bit of b at each step. As an integer b only has O(log b)
+bits, rsq(b) runs in O(log n) time when b = n. In Figure 2.11, rsq(6) = ft[6] + ft[4]
+= 5 + 2 = 7. Notice that indices 4 and 6 are responsible for range [1..4] and [5..6],
+respectively. By combining them, we account for the entire range of [1..6]. The indices
+6, 4, and 0 are related in their binary form: b = 610 = (110)2 can be transformed to b’ =
+410 = (100)2 and subsequently to b’’ = 010 = (000)2.
+With rsq(b) available, obtaining the cumulative frequency between two indices [a..b]
+where a != 1 is simple, just evaluate rsq(a, b) = rsq(b) - rsq(a - 1). For example, if
+we want to compute rsq(4, 6), we can simply return rsq(6) - rsq(3) = (5+2) - (0+1)
+= 7 - 1 = 6. Again, this operation runs in O(2 × log b) ≈ O(log n) time when b = n.
+Figure 2.12 displays the value of rsq(3).
+When updating the value of the element at index k by adjusting its value by v (note
+that v can be either positive or negative), i.e. calling adjust(k, v), we have to update
+ft[k], ft[k’], ft[k’’], . . . until index ki exceeds n. This sequence of indices are obtained This sequence of indices are obtained via this similar iterative bit manipulation expression: k’ = k + LSOne(k). 
+ Starting from any integer k, the operation adjust(k, v) will take at most O(log n) steps until k > n.
+  In Figure 2.13, adjust(5, 1) will affect (add +1 to) ft[k] at indices k = 510 = (101)2, k’ = (101)2 + (001)2 = (110)2 = 610, and k’’ = (110)2 + (010)2 = (1000)2 = 810 via the expression given above. Notice that if you project a line upwards from index 5 in Figure 2.13, you will see that the line indeed intersects the ranges under the responsibility of index 5, index 6, and index 8.

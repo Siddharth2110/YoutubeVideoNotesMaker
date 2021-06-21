@@ -1,0 +1,63 @@
+We can also use the second equation x × y × z = B and assume that x = y = z
+to obtain x × x ×x < B or x < 3
+√
+B. The new range of x is [−22 . . . 22]. We can also prune
+the search space by using if statements to execute only some of the (inner) loops, or use
+break and/or continue statements to stop/skip loops. The code shown below is now much
+faster than the code shown above (there are a few other optimizations required to solve the
+extreme version of this problem: UVa 11571 - Simple Equations - Extreme!!):
+Iterative Complete Search (Permutations: UVa 11742 - Social Constraints)
+Abridged problem statement: There are 0 < n ≤ 8 movie goers. They will sit in the front
+row in n consecutive open seats. There are 0 ≤ m ≤ 20 seating constraints among them, i.e.
+movie goer a and movie goer b must be at most (or at least) c seats apart. The question is
+simple: How many possible seating arrangements are there?
+The key part to solve this problem is in realizing that we have to explore all permutations
+(seating arrangements). Once we realize this fact, we can derive this simple O(m × n!)
+‘filtering’ solution. We set counter = 0 and then try all possible n! permutations. We
+increase the counter by 1 if the current permutation satisfies all m constraints. When all n!
+permutations have been examined, we output the final value of counter. As the maximum n is 8 and maximum m is 20, the largest test case will still only require 20 × 8! = 806400
+operations—a perfectly viable solution.
+If you have never written an algorithm to generate all permutations of a set of numbers
+(see Exercise 1.2.3, task 7), you may still be unsure about how to proceed. The simple
+C++ solution is shown below.
+Iterative Complete Search (Subsets: UVa 12455 - Bars)
+Abridged problem statement1: Given a list l containing 1 ≤ n ≤ 20 integers, is there a
+subset of list l that sums to another given integer X?
+We can try all 2n possible subsets of integers, sum the selected integers for each subset in
+O(n), and see if the sum of the selected integers equals to X. The overall time complexity
+is thus O(n × 2n). For the largest test case when n = 20, this is just 20 × 220 ≈ 21M. This
+is ‘large’ but still viable (for reason described below).
+Recursive Complete Search
+Simple Backtracking: UVa 750 - 8 Queens Chess Problem
+Abridged problem statement: In chess (with an 8 × 8 board), it is possible to place eight
+queens on the board such that no two queens attack each other. Determine all such possible
+arrangements given the position of one of the queens (i.e. coordinate (a, b) must contain a
+queen). Output the possibilities in lexicographical (sorted) order.
+The most na¨ıve solution is to enumerate all combinations of 8 different cells out of the
+8 × 8 = 64 possible cells in a chess board and see if the 8 queens can be placed at these
+positions without conflicts. However, there are 64C8 ≈ 4B such possibilities—this idea is not
+even worth trying.
+A better but still na¨ıve solution is to realize that each queen can only occupy one column,
+so we can put exactly one queen in each column. There are only 88 ≈ 17M possibilities now,
+down from 4B. This is still a ‘borderline’-passing solution for this problem. If we write a
+Complete Search like this, we are likely to receive the Time Limit Exceeded (TLE) verdict
+especially if there are multiple test cases. We can still apply the few more easy optimizations
+described below to further reduce the search space.
+We know that no two queens can share the same column or the
+same row. Using this, we can further simplify the original problem
+to the problem of finding valid permutations of 8! row positions.
+The value of row[i] describes the row position of the queen in
+column i. Example: row = {1, 3, 5, 7, 2, 0, 6, 4} as in
+Figure 3.1 is one of the solutions for this problem; row[0] = 1
+implies that the queen in column 0 is placed in row 1, and so
+on (the index starts from 0 in this example). Modeled this way,
+the search space goes down from 88 ≈ 17M to 8! ≈ 40K. This
+solution is already fast enough, but we can still do more.
+We also know that no two queens can share any of the two diagonal lines. Let queen A be
+at (i, j) and queen B be at (k, l). They attack each other iff abs(i-k) == abs(j-l).
+This formula means that the vertical and horizontal distances between these two queens are
+equal, i.e. queen A and B lie on one of each other’s two diagonal lines.
+A recursive backtracking solution places the queens one by one in columns 0 to 7, observing
+all the constraints above. Finally, if a candidate solution is found, check if at least one
+of the queens satisfies the input constraints, i.e. row[b] == a. This sub (i.e. lower than)
+O(n!) solution will obtain an AC verdict.

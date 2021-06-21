@@ -1,0 +1,75 @@
+Tip 5: Try Solving the Problem Backwards
+Some contest problems look far easier when they are solved ‘backwards’ [53] (from a less
+obvious angle) than when they are solved using a frontal attack (from the more obvious
+angle). Be prepared to attempt unconventional approaches to problems.
+This tip is best illustrated using an example: UVa 10360 - Rat Attack: Imagine a 2D
+array (up to 1024× 1024) containing rats. There are n ≤ 20000 rats spread across the cells.
+Determine which cell (x, y) should be gas-bombed so that the number of rats killed in a square box (x-d, y-d) to (x+d, y+d) is maximized. The value d is the power of the
+gas-bomb (d ≤ 50), see Figure 3.2.
+An immediate solution is to attack this problem in the most obvious fashion possible:
+bomb each of the 10242 cells and select the most effective location. For each bombed cell
+(x, y), we can perform an O(d2) scan to count the number of rats killed within the squarebombing
+radius. For the worst case, when the array has size 10242 and d = 50, this takes
+10242 × 502 = 2621M operations. TLE3!
+Another option is to attack this problem backwards: Create
+an array int killed[1024][1024]. For each rat population
+at coordinate (x, y), add it to killed[i][j], where |i−x| ≤
+d and |j − y| ≤ d. This is because if a bomb was placed at
+(i, j), the rats at coordinate (x, y) will be killed. This
+pre-processing takes O(n×d2) operations. Then, to determine
+the most optimal bombing position, we can simply find the
+coordinate of the highest entry in array killed, which can be
+done in 10242 operations. This approach only requires 20000×
+502 + 10242 = 51M operations for the worst test case (n =
+20000, d = 50), ≈ 51 times faster than the frontal attack! This
+is an AC solution.
+Tip 6: Optimizing Your Source Code
+There are many tricks that you can use to optimize your code. Understanding computer
+hardware and how it is organized, especially the I/O, memory, and cache behavior, can help
+you design better code. Some examples (not exhaustive) are shown below:
+1. A biased opinion: Use C++ instead of Java. An algorithm implemented using C++
+usually runs faster than the one implemented in Java in many online judges, including
+UVa [47]. Some programming contests give Java users extra time to account for the
+difference in performance.
+2. For C/C++ users, use the faster C-style scanf/printf rather than cin/cout.
+3. Use the expected O(n log n) but cache-friendly quicksort in C++ STL algorithm::sort
+(part of ‘introsort’) rather than the true O(n log n) but non cache-friendly heapsort (its
+root-to-leaf/leaf-to-root operations span a wide range of indices—lots of cache misses).
+4. Access a 2D array in a row major fashion (row by row) rather than in a column major
+fashion—multidimensional arrays are stored in a row-major order in memory.
+5. Bit manipulation on the built-in integer data types (up to the 64-bit integer) is more
+efficient than index manipulation in an array of booleans (see bitmask in Section 2.2).
+If we need more than 64 bits, use the C++ STL bitset rather than vector<bool>
+(e.g. for Sieve of Eratosthenes in Section 5.5.1).
+6. Use lower level data structures/types at all times if you do not need the extra functionality
+in the higher level (or larger) ones. For example, use an array with a slightly
+larger size than the maximum size of input instead of using resizable vectors. Also,
+use 32-bit ints instead of 64-bit long longs as the 32-bit int is faster in most 32-bit
+online judge systems.
+7. For Java, use the faster ArrayList (and StringBuilder) rather than Vector (and
+StringBuffer). Java Vectors and StringBuffers are thread safe but this feature
+is not needed in competitive programming. Note: In this book, we will stick with
+Vectors to avoid confusing bilingual C++ and Java readers who use both the C++
+STL vector and Java Vector.
+8. Declare most data structures (especially the bulky ones, e.g. large arrays) once by
+placing them in global scope. Allocate enough memory to deal with the largest input
+of the problem. This way, we do not have to pass the data structures around as function
+arguments. For problems with multiple test cases, simply clear/reset the contents of
+the data structure before dealing with each test case.
+9. When you have the option to write your code either iteratively or recursively, choose the
+iterative version. Example: The iterative C++ STL next permutation and iterative
+subset generation techniques using bitmask shown in Section 3.2.1 are (far) faster than
+if you write similar routines recursively (mainly due to overheads in function calls).
+10. Array access in (nested) loops can be slow. If you have an array A and you frequently
+access the value of A[i] (without changing it) in (nested) loops, it may be beneficial
+to use a local variable temp = A[i] and works with temp instead.
+11. In C/C++, appropriate usage of macros or inline functions can reduce runtime.
+12. For C++ users: Using C-style character arrays will yield faster execution than when
+using the C++ STL string. For Java users: Be careful with String manipulation as
+Java String objects are immutable. Operations on Java Strings can thus be very
+slow. Use Java StringBuilder instead.
+Browse the Internet or relevant books (e.g. [69]) to find (much) more information on how to
+speed up your code. Practice this ‘code hacking skill’ by choosing a harder problem in UVa
+online judge where the runtime of the best solution is not 0.000s. Submit several variants of
+your Accepted solution and check the runtime differences. Adopt hacking modification that
+consistently gives you faster runtime.

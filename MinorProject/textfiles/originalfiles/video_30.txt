@@ -1,0 +1,63 @@
+The root of segment tree represents segment [0, n-1]. For each segment [L, R] stored
+in index p where L != R, the segment will be split into [L, (L+R)/2] and [(L+R)/2+1, R]
+in a left and right vertices. The left sub-segment and right sub-segment will be stored in index
+2×p and (2×p)+1 respectively. WhenL = R, it is clear that st[p] = L (or R). Otherwise, we
+will recursively build the segment tree, comparing the minimum value of the left and the right
+sub-segments and updating the st[p] of the segment. This process is implemented in the
+build routine below. This build routine creates up to O(1+2+4+8+. . .+2log2 n) = O(2n)
+(smaller) segments and therefore runs in O(n). However, as we use simple 1-based compact
+array indexing, we need st to be at least of size 2 ∗ 2(log2(n)+1. In our implementation, we
+simply use a loose upper bound of space complexity O(4n) = O(n). For array A above, the
+corresponding segment tree is shown in Figure 2.8 and 2.9.
+With the segment tree ready, answering an RMQ can be done in O(log n). The answer
+for RMQ(i, i) is trivial—simply return i itself. However, for the general case RMQ(i, j),
+further checks are needed. Let p1 = RMQ(i, (i+j)/2) and p2 = RMQ((i+j)/2 + 1, j).
+Then RMQ(i, j) is p1 if A[p1] ≤ A[p2] or p2 otherwise. This process is implemented in
+the rmq routine below.
+Take for example the query RMQ(1, 3). The process in Figure 2.8 is as follows: Start from
+the root (index 1) which represents segment [0, 6]. We cannot use the stored minimum
+value of segment [0, 6] = st[1] = 5 as the answer for RMQ(1, 3) since it is the minimum
+value over a larger26 segment than the desired [1, 3]. From the root, we only have to go to
+the left subtree as the root of the right subtree represents segment [4, 6] which is outside27
+the desired range in RMQ(1, 3).
+We are now at the root of the left subtree (index 2) that represents segment [0, 3]. This
+segment [0, 3] is still larger than the desired RMQ(1, 3). In fact, RMQ(1, 3) intersects
+both the left sub-segment [0, 1] (index 4) and the right sub-segment [2, 3] (index 5) of
+segment [0, 3], so we have to explore both subtrees (sub-segments).
+The left segment [0, 1] (index 4) of [0, 3] (index 2) is not yet inside the RMQ(1, 3),
+so another split is necessary. From segment [0, 1] (index 4), we move right to segment
+[1, 1] (index 9), which is now inside28 [1, 3]. At this point, we know that RMQ(1, 1) =
+st[9] = 1 and we can return this value to the caller. The right segment [2, 3] (index 5)
+of [0, 3] (index 2) is inside the required [1, 3]. From the stored value inside this vertex,
+we know that RMQ(2, 3) = st[5] = 2. We do not need to traverse further down.
+Now, back in the call to segment [0, 3] (index 2), we now have p1 = RMQ(1, 1) = 1
+and p2 = RMQ(2, 3) = 2. Because A[p1] > A[p2] since A[1] = 17 and A[2] = 13, we
+now have RMQ(1, 3) = p2 = 2. This is the final answer.
+Now let’s take a look at another example: RMQ(4, 6). The execution in Figure 2.9 is as
+follows: We again start from the root segment [0, 6] (index 1). Since it is larger than
+the RMQ(4, 6), we move right to segment [4, 6] (index 3) as segment [0, 3] (index 2)
+is outside. Since this segment exactly represents RMQ(4, 6), we simply return the index of
+minimum element that is stored in this vertex, which is 5. Thus RMQ(4, 6) = st[3] = 5.
+This data structure allows us to avoid traversing the unnecessary parts of the tree! In the
+worst case, we have two root-to-leaf paths which is just O(2×log(2n)) = O(log n). Example:
+In RMQ(3, 4) = 4, we have one root-to-leaf path from [0, 6] to [3, 3] (index 1 → 2 →
+5 → 11) and another root-to-leaf path from [0, 6] to [4, 4] (index 1 → 3 → 6 → 12).
+If the array A is static (i.e. unchanged after it is instantiated), then using a Segment
+Tree to solve the RMQ problem is overkill as there exists a Dynamic Programming (DP)
+solution that requires O(n log n) one-time pre-processing and allows for O(1) per RMQ. This
+DP solution will be discussed later in Section 9.33.
+Segment Tree is useful if the underlying array is frequently updated (dynamic). For
+example, if A[5] is now changed from 11 to 99, then we just need to update the vertices
+along the leaf to root path in O(log n). See path: [5, 5] (index 13, st[13] is unchanged)
+→ [4, 5] (index 6, st[6] = 4 now) → [4, 6] (index 3, st[3] = 4 now) → [0, 6] (index 1, st[1] = 2 now) in Figure 2.10. For comparison, the DP solution presented in Section
+9.33 requires another O(n log n) pre-processing to update the structure and is ineffective for
+such dynamic updates.
+Binary Indexed (Fenwick) Tree
+Fenwick Tree—also known as Binary Indexed Tree (BIT)—were invented by Peter M.
+Fenwick in 1994 [18]. In this book, we will use the term Fenwick Tree as opposed to BIT
+in order to differentiate with the standard bit manipulations. The Fenwick Tree is a useful
+data structure for implementing dynamic cumulative frequency tables. Suppose we have29
+test scores of m = 11 students f = {2,4,5,5,6,6,6,7,7,8,9} where the test scores are
+integer values ranging from [1..10]. Table 2.1 shows the frequency of each individual test
+score ∈ [1..10] and the cumulative frequency of test scores ranging from [1..i] denoted
+by cf[i]—that is, the sum of the frequencies of test scores 1, 2, ..., i.

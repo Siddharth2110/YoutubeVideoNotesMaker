@@ -1,0 +1,57 @@
+Tip 7: Use Better Data Structures & Algorithms :)
+No kidding. Using better data structures and algorithms will always outperform any optimizations
+mentioned in Tips 1-6 above. If you are sure that you have written your fastest
+Complete Search code, but it is still judged as TLE, abandon the Complete Search approach.
+Remarks About Complete Search in Programming Contests
+The main source of the ‘Complete Search’ material in this chapter is the USACO training
+gateway [48]. We have adopted the name ‘Complete Search’ rather than ‘Brute-Force’ (with
+its negative connotations) as we believe that some Complete Search solutions can be clever
+and fast. We feel that the term ‘clever Brute-Force’ is also a little self-contradictory.
+If a problem is solvable by Complete Search, it will also be clear when to use the iterative
+or recursive backtracking approaches. Iterative approaches are used when one can derive the
+different states easily with some formula relative to a certain counter and (almost) all states
+have to be checked, e.g. scanning all the indices of an array, enumerating (almost) all possible
+subsets of a small set, generating (almost) all permutations, etc. Recursive Backtracking is
+used when it is hard to derive the different states with a simple index and/or one also wants
+to (heavily) prune the search space, e.g. the 8-queens chess problem. If the search space
+of a problem that is solvable with Complete Search is large, then recursive backtracking
+approaches that allow early pruning of infeasible sections of the search space are usually
+used. Pruning in iterative Complete Searches is not impossible but usually difficult.
+The best way to improve your Complete Search skills is to solve more Complete Search
+problems. We have provided a list of such problems, separated into several categories below.
+Please attempt as many as possible, especially those that are highlighted with the
+must try * indicator. Later in Section 3.5, readers will encounter further examples of recursive
+backtracking, but with the addition of the ‘memoization’ technique.
+Note that we will discuss some more advanced search techniques later in Section 8.2,
+e.g. using bit manipulation in recursive backtracking, harder state-space search, Meet in
+the Middle, A* Search, Depth Limited Search (DLS), Iterative Deepening Search (IDS), and
+Iterative Deepening A* (IDA*).
+3.3 Divide and Conquer
+Divide and Conquer (abbreviated as D&C) is a problem-solving paradigm in which a problem
+is made simpler by ‘dividing’ it into smaller parts and then conquering each part. The steps:
+1. Divide the original problem into sub-problems—usually by half or nearly half,
+2. Find (sub)-solutions for each of these sub-problems—which are now easier,
+3. If needed, combine the sub-solutions to get a complete solution for the main problem.
+We have seen examples of the D&C paradigm in the previous sections of this book: Various
+sorting algorithms (e.g. Quick Sort, Merge Sort, Heap Sort) and Binary Search in Section
+2.2 utilize this paradigm. The way data is organized in Binary Search Tree, Heap, Segment
+Tree, and Fenwick Tree in Section 2.3, 2.4.3, and 2.4.4 also relies upon the D&C paradigm.
+3.3.1 Interesting Usages of Binary Search
+In this section, we discuss the D&C paradigm in the well-known Binary Search algorithm.
+We classify Binary Search as a ‘Divide’ and Conquer algorithm although one reference [40]
+suggests that it should be actually classified as ‘Decrease (by-half)’ and Conquer as it does
+not actually ‘combine’ the result. We highlight this algorithm because many contestants
+know it, but not many are aware that it can be used in many other non-obvious ways.
+Binary Search: The Ordinary Usage
+Recall that the canonical usage of Binary Search is searching for an item in a static sorted
+array. We check the middle of the sorted array to determine if it contains what we are
+looking for. If it is or there are no more items to consider, stop. Otherwise, we can decide
+whether the answer is to the left or right of the middle element and continue searching.
+As the size of search space is halved (in a binary fashion) after each check, the complexity
+of this algorithm is O(log n). In Section 2.2, we have seen that there are built-in library
+routines for this algorithm, e.g. the C++ STL algorithm::lower bound (and the Java
+Collections.binarySearch).
+This is not the only way to use binary search. The pre-requisite for performing a binary
+search—a static sorted sequence (array or vector)—can also be found in other uncommon
+data structures such as in the root-to-leaf path of a tree (not necessarily binary nor complete)
+that satisfies the min heap property. This variant is discussed below.

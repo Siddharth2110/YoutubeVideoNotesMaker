@@ -1,0 +1,64 @@
+In IOI 2009 and 2010, there has been 1 easy task per competition day11, usually an (Easy)
+Ad Hoc task. If you are an IOI contestant, you will definitely not win any medals for just
+solving the 2 easy Ad Hoc tasks over the 2 competition days. However, the faster you can
+clear these 2 easy tasks, the more time that you will have to work on the other 2 × 3 = 6
+challenging tasks.
+We have listed many Ad Hoc problems that we have solved in the UVa Online Judge
+[47] in the several categories below. We believe that you can solve most of these problems
+without using the advanced data structures or algorithms that will be discussed in the later
+chapters. Many of these Ad Hoc problems are ‘simple’ but some of them maybe ‘tricky’.
+Try to solve a few problems from each category before reading the next chapter.
+Note: A small number of problems, although listed as part of Chapter 1, may require
+knowledge from subsequent chapters, e.g. knowledge of linear data structures (arrays) in
+Section 2.2, knowledge of backtracking in Section 3.2, etc. You can revisit these harder Ad
+Hoc problems after you have understood the required concepts.
+The categories:
+• Game (Card)
+There are lots of Ad Hoc problems involving popular games. Many are related to card
+games. You will usually need to parse the input strings (see Section 6.3) as playing
+cards have both suits.
+It may be a good idea to map these troublesome strings to integer indices. For example,
+one possible mapping is to map D2 → 0, D3 → 1, . . . , DA → 12, C2 → 13, C3 → 14,
+. . . , SA → 51. Then, you can work with the integer indices instead.
+• Game (Chess)
+Chess is another popular game that sometimes appears in programming contest problems.
+Some of these problems are Ad Hoc and listed in this section. Some of them are
+combinatorial with tasks like counting how many ways there are to place 8-queens in
+8 × 8 chess board. These are listed in Chapter 3.
+• Game (Others), easier and harder (or more tedious)
+Other than card and chess games, many other popular games have made their way into
+programming contests: Tic Tac Toe, Rock-Paper-Scissors, Snakes/Ladders, BINGO, Bowling, etc. Knowing the details of these games may be helpful, but most of the
+game rules are given in the problem description to avoid disadvantaging contestants
+who are unfamiliar with the games.
+• Problems related to Palindromes
+These are also classic problems. A palindrome is a word (or a sequence) that can
+be read the same way in either direction. The most common strategy to check if a
+word is palindromic is to loop from the first character to the middle one and check
+if the characters match in the corresponding position from the back. For example,
+‘ABCDCBA’ is a palindrome. For some harder palindrome-related problems, you
+may want to check Section 6.5 for Dynamic Programming solutions.
+• Problems related to Anagrams
+This is yet another class of classic problems. An anagram is a word (or phrase) whose
+letters can be rearranged to obtain another word (or phrase). The common strategy
+to check if two words are anagrams is to sort the letters of the words and compare
+the results. For example, take wordA = ‘cab’, wordB = ‘bca’. After sorting, wordA
+= ‘abc’ and wordB = ‘abc’ too, so they are anagrams. See Section 2.2 for various
+sorting techniques.
+• Interesting Real Life Problems, easier and harder (or more tedious)
+This is one of the most interesting problem categories in the UVa Online Judge. We
+believe that real life problems like these are interesting to those who are new to Computer
+Science. The fact that we write programs to solve real life problems can be
+an additional motivational boost. Who knows, you might stand to gain new (and
+interesting) information from the problem description!
+• Ad Hoc problems involving Time
+These problems utilize time concepts such as dates, times, and calendars. These are
+also real life problems. As mentioned earlier, these problems can be a little more
+interesting to solve. Some of these problems will be far easier to solve if you have
+mastered the Java GregorianCalendar class as it has many library functions that deal
+with time.
+• ‘Time Waster’ problems
+These are Ad Hoc problems that are written specifically to make the required solution
+long and tedious. These problems, if they do appear in a programming contest, would
+determine the team with the most efficient coder—someone who can implement complicated
+but still accurate solutions under time constraints. Coaches should consider
+adding such problems in their training programmes.

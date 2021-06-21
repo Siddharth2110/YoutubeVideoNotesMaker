@@ -1,0 +1,60 @@
+The key idea of Kadane’s algorithm is to keep a running sum of the integers seen so far and
+greedily reset that to 0 if the running sum dips below 0. This is because re-starting from
+0 is always better than continuing from a negative running sum. Kadane’s algorithm is the
+required algorithm to solve this UVa 507 problem as n ≤ 20K.
+Note that we can also view this Kadane’s algorithm as a DP solution. At each step,
+we have two choices: We can either leverage the previously accumulated maximum sum, or
+begin a new range. The DP variable dp(i) thus represents the maximum sum of a range of
+integers that ends with element A[i]. Thus, the final answer is the maximum over all the
+values of dp(i) where i ∈ [0..n-1]. If zero-length ranges are allowed, then 0 must also be
+considered as a possible answer. The implementation above is essentially an efficient version
+that utilizes the space saving trick discussed earlier.
+How do we tackle this problem? An initial approach might be this Complete Search algorithm:
+Try all possible cutting points. Before that, we have to select an appropriate state
+definition for the problem: The (intermediate) sticks. We can describe a stick with its two
+endpoints: left and right. However, these two values can be very huge and this can complicate
+the solution later when we want to memoize their values. We can take advantage of
+the fact that there are only n+1 smaller sticks after cutting the original stick n times. The
+endpoints of each smaller stick can be described by 0, the cutting point coordinates, and l.
+Therefore, we will add two more coordinates so that A = {0, the original A, and l} so that
+we can denote a stick by the indices of its endpoints in A.
+We can then use these recurrences for cut(left, right), where left/right are the
+left/right indices of the current stick w.r.t. A. Originally, the stick is described by left = 0
+and right = n+1, i.e. a stick with length [0..l]:
+1. cut(i-1, i) = 0, ∀i ∈ [1..n+1] // if left + 1 = right where left and right are
+the indices in A, then we have a stick segment that does not need to be divided further.
+2. cut(left, right) = min(cut(left, i) + cut(i, right) + (A[right]-A[left]))
+∀i ∈ [left+1..right-1] // try all possible cutting points and pick the best.
+The cost of a cut is the length of the current stick, captured in (A[right]-A[left]).
+The answer can be found at cut(0, n+1).
+Many real-life problems can be classified as graph problems. Some have efficient solutions.
+Some do not have them yet. In this relatively big chapter with lots of figures, we discuss graph
+problems that commonly appear in programming contests, the algorithms to solve them, and
+the practical implementations of these algorithms. We cover topics ranging from basic graph
+traversals, minimum spanning trees, single-source/all-pairs shortest paths, network flows,
+and discuss graphs with special properties.
+In writing this chapter, we assume that the readers are already familiar with the graph
+terminologies listed in Table 4.1. If you encounter any unfamiliar term, please read other
+reference books like [7, 58] (or browse the Internet) and search for that particular term.
+We also assume that the readers have read various ways to represent graph information that
+have been discussed earlier in Section 2.4.1. That is, we will directly use the terms like:
+Adjacency Matrix, Adjacency List, Edge List, and implicit graph without redefining them.
+Please revise Section 2.4.1 if you are not familiar with these graph data structures.
+Our research so far on graph problems in recent ACM ICPC (Asia) regional contests
+reveals that there is at least one (and possibly more) graph problem(s) in an ICPC problem
+set. However, since the range of graph problems is so big, each graph problem only has a
+small probability of appearance. So the question is “Which ones do we have to focus on?”.
+In our opinion, there is no clear answer for this question. If you want to do well in ACM
+ICPC, you have no choice but to study and master all these materials.
+For IOI, the syllabus [20] restricts IOI tasks to a subset of material mentioned in this
+chapter. This is logical as high school students competing in IOI are not expected to be
+well-versed with too many problem-specific algorithms. To assist the readers aspiring to
+take part in the IOI, we will mention whether a particular section in this chapter is currently
+outside the syllabus.
+Depth First Search (DFS)
+Depth First Search—abbreviated as DFS—is a simple algorithm for traversing a graph.
+Starting from a distinguished source vertex, DFS will traverse the graph ‘depth-first’. Every
+time DFS hits a branching point (a vertex with more than one neighbors), DFS will choose
+one of the unvisited neighbor(s) and visit this neighbor vertex. DFS repeats this process and
+goes deeper until it reaches a vertex where it cannot go any deeper. When this happens,
+DFS will ‘backtrack’ and explore another unvisited neighbor(s), if any.

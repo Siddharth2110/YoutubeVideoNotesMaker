@@ -1,0 +1,68 @@
+• More advanced analysis techniques:
+– Prove the correctness of an algorithm (especially for Greedy algorithms in Section
+3.4), to minimize your chance of getting the ‘Wrong Answer’ verdict.
+– Perform the amortized analysis (e.g. see Chapter 17 of [7])—although rarely
+used in contests—to minimize your chance of getting the ‘Time Limit Exceeded’
+verdict, or worse, considering your algorithm to be too slow and skips the problem
+when it is in fact fast enough in amortized sense.
+– Do output-sensitive analysis to analyze algorithm which (also) depends on output
+size and minimize your chance of getting the ‘Time Limit Exceeded’ verdict. For
+example, an algorithm to search for a string with length m in a long string with
+the help of a Suffix Tree (that is already built) runs in O(m+occ) time. The time
+taken for this algorithm to run depends not only on the input size m but also the
+output size—the number of occurrences occ (see more details in Section 6.6).
+• Familiarity with these bounds:
+– 210 = 1, 024 ≈ 103, 220 = 1, 048, 576 ≈ 106.
+– 32-bit signed integers (int) and 64-bit signed integers (long long) have upper
+limits of 231−1 ≈ 2×109 (safe for up to ≈ 9 decimal digits) and 263−1 ≈ 9×1018
+(safe for up to ≈ 18 decimal digits) respectively.
+– Unsigned integers can be used if only non-negative numbers are required. 32-bit
+unsigned integers (unsigned int) and 64-bit unsigned integers (unsigned long
+long) have upper limits of 232 −1 ≈ 4×109 and 264 −1 ≈ 1.8×1019 respectively.
+– If you need to store integers ≥ 264, use the Big Integer technique (Section 5.3).
+– There are n! permutations and 2n subsets (or combinations) of n elements.
+– The best time complexity of a comparison-based sorting algorithm is Ω(n log2 n).
+– Usually, O(n log2 n) algorithms are sufficient to solve most contest problems.
+– The largest input size for typical programming contest problems must be < 1M.
+Beyond that, the time needed to read the input (the Input/Output routine) will
+be the bottleneck.
+– A typical year 2013 CPU can process 100M = 108 operations in a few seconds.
+Many novice programmers would skip this phase and immediately begin implementing the
+first (na¨ıve) algorithm that they can think of only to realize that the chosen data structure
+or algorithm is not efficient enough (or wrong). Our advice for ICPC contestants6: Refrain
+from coding until you are sure that your algorithm is both correct and fast enough.
+To help you understand the growth of several common time complexities, and thus help you
+judge how fast is ‘enough’, refer to Table 1.4. Variants of such tables are also found in many
+other books on data structures and algorithms. This table is written from a programming
+contestant’s perspective. Usually, the input size constraints are given in a (good) problem
+description. With the assumption that a typical CPU can execute a hundred million operations
+in around 3 seconds (the typical time limit in most UVa [47] problems), we can predict
+the ‘worst’ algorithm that can still pass the time limit. Usually, the simplest algorithm has
+the poorest time complexity, but if it can pass the time limit, just use it!
+Tip 4: Master Programming Languages
+There are several programming languages supported in ICPC7, including C/C++ and Java.
+Which programming languages should one aim to master?
+Our experience gives us this answer: We prefer C++ with its built-in Standard Template
+Library (STL) but we still need to master Java. Even though it is slower, Java has powerful
+built-in libraries and APIs such as BigInteger/BigDecimal, GregorianCalendar, Regex, etc.
+Java programs are easier to debug with the virtual machine’s ability to provide a stack trace when it crashes (as opposed to core dumps or segmentation faults in C/C++). On the
+other hand, C/C++ has its own merits as well. Depending on the problem at hand, either
+language may be the better choice for implementing a solution in the shortest time.
+Suppose that a problem requires you to compute 25! (the factorial of 25). The answer is
+very large: 15,511,210,043,330,985,984,000,000. This far exceeds the largest built-in primitive
+integer data type (unsigned long long: 264−1). As there is no built-in arbitrary-precision
+arithmetic library in C/C++ as of yet, we would have needed to implement one from scratch.
+The Java code, however, is exceedingly simple (more details in Section 5.3). In this case,
+using Java definitely makes for shorter coding time.
+Mastering and understanding the full capability of your favourite programming language is
+also important. Take this problem with a non-standard input format: the first line of input
+is an integer N. This is followed by N lines, each starting with the character ‘0’, followed
+by a dot ‘.’, then followed by an unknown number of digits (up to 100 digits), and finally
+terminated with three dots ‘...’.
+Not many C/C++ programmers are aware of partial regex capabilities built into the C
+standard I/O library. Although scanf/printf are C-style I/O routines, they can still be
+used in C++ code. Many C++ programmers ‘force’ themselves to use cin/cout all the time
+even though it is sometimes not as flexible as scanf/printf and is also far slower.
+In programming contests, especially ICPCs, coding time should not be the primary
+bottleneck. Once you figure out the ‘worst AC algorithm’ that will pass the given time limit,
+you are expected to be able to translate it into a bug-free code and fast!

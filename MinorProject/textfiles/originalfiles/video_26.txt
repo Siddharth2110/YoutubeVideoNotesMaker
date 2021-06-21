@@ -1,0 +1,71 @@
+Non-Linear DS with Built-in Libraries
+For some problems, linear storage is not the best way to organize data. With the efficient
+implementations of non-linear data structures shown below, you can operate on the data in
+a quicker fashion, thereby speeding up the algorithms that rely on them.
+For example, if you need a dynamic11 collection of pairs (e.g. key → value pairs), using
+C++ STL map below can provide you O(log n) performance for insertion/search/deletion
+operations with just a few lines of code (that you still have to write yourself), whereas
+storing the same information inside a static array of structs may require O(n) insertion/
+search/deletion, and you will need to write the longer traversal code yourself.
+• Balanced Binary Search Tree (BST): C++ STL map/set (Java TreeMap/TreeSet)
+The BST is one way to organize data in a tree structure. In each subtree rooted at x,
+the following BST property holds: Items on the left subtree of x are smaller than x
+and items on the right subtree of x are greater than (or equal to) x. This is essentially
+an application of the Divide and Conquer strategy (also see Section 3.3). Organizing
+the data like this (see Figure 2.2) allows for O(log n) search(key), insert(key),
+findMin()/findMax(), successor(key)/predecessor(key), and delete(key) since
+in the worst case, only O(log n) operations are required in a root-to-leaf scan (see
+[7, 5, 54, 12] for details). However, this only holds if the BST is balanced.
+Implementing bug-free balanced BSTs such as the Adelson-Velskii Landis (AVL)12 or
+Red-Black (RB)13 Trees is a tedious task and is difficult to achieve in a time-constrained
+contest environment (unless you have prepared a code library beforehand, see Section
+9.29). Fortunately, C++ STL has map and set (and Java has TreeMap and TreeSet)
+which are usually implementations of the RB Tree which guarantees that major BST
+operations like insertions/searches/deletions are done in O(log n) time. By mastering
+these two C++ STL template classes (or Java APIs), you can save a lot of precious
+coding time during contests! The difference between these two data structures is simple:
+the C++ STL map (and Java TreeMap) stores (key → data) pairs whereas the C++ STL set (and Java TreeSet) only stores the key. For most (contest) problems, we use
+a map (to really map information) instead of a set (a set is only useful for efficiently
+determining the existence of a certain key). However, there is a small drawback. If we
+use the library implementations, it becomes difficult or impossible to augment (add
+extra information to) the BST. Please attempt Exercise 2.3.5* and read Section 9.29
+for more details.
+Heap: C++ STL priority queue (Java PriorityQueue)
+The heap is another way to organize data in a tree. The (Binary) Heap is also a binary
+tree like the BST, except that it must be a complete14 tree. Complete binary trees
+can be stored efficiently in a compact 1-indexed array of size n + 1, which is often
+preferred to an explicit tree representation. For example, the array A = {N/A, 90, 19,
+36, 17, 3, 25, 1, 2, 7} is the compact array representation of Figure 2.3 with index 0
+ignored. One can navigate from a certain index (vertex) i to its parent, left child, and
+right child by using simple index manipulation:  i
+2
+, 2 × i, and 2× i + 1, respectively.
+These index manipulations can be made faster using bit manipulation techniques (see
+Section 2.2): i >> 1, i << 1, and (i << 1) + 1, respectively.
+Instead of enforcing the BST property, the (Max) Heap enforces the Heap property:
+in each subtree rooted at x, items on the left and right subtrees of x are smaller than
+(or equal to) x (see Figure 2.3). This is also an application of the Divide and Conquer
+concept (see Section 3.3). The property guarantees that the top (or root) of the heap
+is always the maximum element. There is no notion of a ‘search’ in the Heap (unlike
+BSTs). The Heap instead allows for the fast extraction (deletion) of the maximum
+element: ExtractMax() and insertion of new items: Insert(v)—both of which can
+be easily achieved by in a O(log n) root-to-leaf or leaf-to-root traversal, performing
+swapping operations to maintain the (Max) Heap property whenever necessary (see
+[7, 5, 54, 12] for details).
+The (Max) Heap is a useful data structure for modeling a Priority Queue, where the
+item with the highest priority (the maximum element) can be dequeued (ExtractMax()) and a new item v can be enqueued (Insert(v)), both in O(log n) time. The implementation15
+of priority queue is available in the C++ STL queue library (or Java
+PriorityQueue). Priority Queues are an important component in algorithms like
+Prim’s (and Kruskal’s) algorithms for the Minimum Spanning Tree (MST) problem
+(see Section 4.3), Dijkstra’s algorithm for the Single-Source Shortest Paths (SSSP)
+problem (see Section 4.4.3), and the A* Search algorithm (see Section 8.2.5).
+This data structure is also used to perform partial sort in the C++ STL algorithm
+library. One possible implementation is by processing the elements one by one and
+creating a Max16 Heap of k elements, removing the largest element whenever its size
+exceeds k (k is the number of elements requested by user). The smallest k elements
+can then be obtained in descending order by dequeuing the remaining elements in the
+Max Heap. As each dequeue operation is O(log k), partial sort has O(n log k) time
+complexity17. When k = n, this algorithm is equivalent to a heap sort. Note that
+although the time complexity of a heap sort is also O(n log n), heap sorts are often
+slower than quick sorts because heap operations access data stored in distant indices
+and are thus not cache-friendly.

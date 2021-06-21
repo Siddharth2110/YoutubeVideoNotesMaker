@@ -1,0 +1,60 @@
+Tips
+The biggest gamble in writing a Complete Search solution is whether it will or will not be
+able to pass the time limit. If the time limit is 10 seconds (online judges do not usually
+use large time limits for efficient judging) and your program currently runs in ≈ 10 seconds
+on several (can be more than one) test cases with the largest input size as specified in the
+problem description, yet your code is still judged to be TLE, you may want to tweak the
+‘critical code’2 in your program instead of re-solving the problem with a faster algorithm
+which may not be easy to design.
+Here are some tips that you may want to consider when designing your Complete Search
+solution for a certain problem to give it a higher chance of passing the Time Limit. Writing
+a good Complete Search solution is an art in itself.
+Tip 1: Filtering versus Generating
+Programs that examine lots of (if not all) candidate solutions and choose the ones that are
+correct (or remove the incorrect ones) are called ‘filters’, e.g. the na¨ıve 8-queens solver with
+64C8 and 88 time complexity, the iterative solution for UVa 725 and UVa 11742, etc. Usually
+‘filter’ programs are written iteratively.
+Programs that gradually build the solutions and immediately prune invalid partial solutions
+are called ‘generators’, e.g. the improved recursive 8-queens solver with its sub-O(n!)
+complexity plus diagonal checks. Usually, ‘generator’ programs are easier to implement when
+written recursively as it gives us greater flexibility for pruning the search space.
+Generally, filters are easier to code but run slower, given that it is usually far more
+difficult to prune more of the search space iteratively. Do the math (complexity analysis) to
+see if a filter is good enough or if you need to create a generator.
+Tip 2: Prune Infeasible/Inferior Search Space Early
+When generating solutions using recursive backtracking (see the tip no 1 above), we may
+encounter a partial solution that will never lead to a full solution. We can prune the search
+there and explore other parts of the search space. Example: The diagonal check in the
+8-queens solution above. Suppose we have placed a queen at row[0] = 2. Placing the
+next queen at row[1] = 1 or row[1] = 3 will cause a diagonal conflict and placing the
+next queen at row[1] = 2 will cause a row conflict. Continuing from any of these infeasible
+partial solutions will never lead to a valid solution. Thus we can prune these partial solutions
+at this juncture and concentrate only on the other valid positions: row[1] = {0, 4, 5, 6,
+7}, thus reducing the overall runtime. As a rule of thumb, the earlier you can prune the
+search space, the better.
+In other problems, we may be able to compute the ‘potential worth’ of a partial (and
+still valid) solution. If the potential worth is inferior to the worth of the current best found
+valid solution so far, we can prune the search there.
+Utilize Symmetries
+Some problems have symmetries and we should try to exploit symmetries to reduce execution
+time! In the 8-queens problem, there are 92 solutions but there are only 12 unique (or
+fundamental/canonical) solutions as there are rotational and line symmetries in the problem.
+You can utilize this fact by only generating the 12 unique solutions and, if needed,
+generate the whole 92 by rotating and reflecting these 12 unique solutions. Example: row =
+{7-1, 7-3, 7-5, 7-7, 7-2, 7-0, 7-6, 7-4} = {6, 4, 2, 0, 5, 7, 1, 3} is the horizontal
+reflection of the configuration in Figure 3.1.
+However, we have to remark that it is true that sometimes considering symmetries can
+actually complicate the code. In competitive programming, this is usually not the best way
+(we want shorter code to minimize bugs). If the gain obtained by dealing with symmetry is
+not significant in solving the problem, just ignore this tip.
+Pre-Computation a.k.a. Pre-Calculation
+Sometimes it is helpful to generate tables or other data structures that accelerate the lookup
+of a result prior to the execution of the program itself. This is called Pre-Computation, in
+which one trades memory/space for time. However, this technique can rarely be used for
+recent programming contest problems.
+For example, since we know that there are only 92 solutions in the standard 8-queens
+chess problem, we can create a 2D array int solution[92][8] and then fill it with all
+92 valid permutations of the 8-queens row positions! That is, we can create a generator
+program (which takes some time to run) to fill this 2D array solution. Afterwards, we can
+write another program to simply and quickly print the correct permutations within the 92
+pre-calculated configurations that satisfy the problem constraints.

@@ -1,0 +1,8 @@
+UPS
+United Parcel Service of North America, Inc., referred as UPS , is one of the largest shipment and logistics companies in the world. The company tracks data on 16.3 million packages per day for 8.8 million customers, with an average of 39.5 million tracking requests from customers per day. The company stores over 16 petabytes of data.
+US Xpress
+US Xpress, provider of a wide variety of transportation solutions collects about a thousand data elements ranging from fuel usage to tire condition to truck engine operations to GPS information, and uses this data for optimal fleet management and to drive productivity saving millions of dollars in operating costs.
+Verizon
+Verizon uses big data to enhance mobile advertising. A unique identifier is created when the user registers in the website. The identifier allows advertiser to use information from the desktop computer. Marketing messages can be delivered to you mobile phone using this information.
+Woolworths
+Woolworths is the largest supermarket/grocery store chain in Australia. Woolworth uses business analytics to analyse customers’ shopping habit. The company nearly spent $20 million dollars to buy stakes in data Analytics Company. Nearly 1 billion is being spent on analysing consumer spending habits, and boosting online sales.

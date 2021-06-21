@@ -1,0 +1,65 @@
+The discussion of each data structure in Section 2.2-2.3 is brief,
+with an emphasis on the important library routines that exist for manipulating the data
+structures. However, special data structures that are common in programming contests,
+such as bitmask and several bit manipulation techniques (see Figure 2.1) are discussed in
+more detail. Section 2.4 contains more data structures for which there exist no built-in
+implementation, and thus require us to build our own libraries. Section 2.4 has a more
+in-depth discussion than Section 2.2-2.3.
+Value-Added Features of this Book
+As this chapter is the first that dives into the heart of competitive programming, we will
+now take the opportunity to highlight several value-added features of this book that you will
+see in this and the following chapters.
+A key feature of this book is its accompanying collection of efficient, fully-implemented
+examples in both C/C++ and Java that many other Computer Science books lack, stopping
+at the ‘pseudo-code level’ in their demonstration of data structures and algorithms.
+This feature has been in the book since the very first edition. The important parts of
+the source code have been included in the book3 and the full source code is hosted at
+sites.google.com/site/stevenhalim/home/material.
+Another strength of this book is the collection of both written and programming exercises
+(mostly supported by the UVa Online Judge [47] and integrated with uHunt—see Appendix
+A). In the third edition, we have added many more written exercises. We have classified the
+written exercises into non-starred and starred ones. The non-starred written exercises are
+meant to be used mainly for self-checking purposes; solutions are given at the back of each
+chapter. The starred written exercises can be used for extra challenges; we do not provide
+solutions for these but may instead provide some helpful hints.
+In the third edition, we have added visualizations4 for many data structures and algorithms
+covered in this book [27]. We believe that these visualizations will be a huge benefit
+to the visual learners in our reader base. At this point in time (24 May 2013), the visualizations
+are hosted at: www.comp.nus.edu.sg/∼stevenha/visualization.
+Linear DS with Built-in Libraries
+A data structure is classified as a linear data structure if its elements form a linear sequence,
+i.e. its elements are arranged from left to right (or top to bottom). Mastery of these basic
+linear data structures below is critical in today’s programming contests.
+• Static Array (native support in both C/C++ and Java)
+This is clearly the most commonly used data structure in programming contests.
+Whenever there is a collection of sequential data to be stored and later accessed using
+their indices, the static array is the most natural data structure to use. As the
+maximum input size is usually mentioned in the problem statement, the array size
+can be declared to be the maximum input size, with a small extra buffer (sentinel) for
+safety—to avoid the unnecessary ‘off by one’ RTE. Typically, 1D, 2D, and 3D arrays
+are used in programming contests—problems rarely require arrays of higher dimension.
+Typical array operations include accessing elements by their indices, sorting elements,
+performing a linear scan or a binary search on a sorted array.
+• Dynamically-Resizeable Array: C++ STL vector (Java ArrayList (faster) or Vector)
+This data structure is similar to the static array, except that it is designed to handle
+runtime resizing natively. It is better to use a vector in place of an array if the size
+of the sequence of elements is unknown at compile-time. Usually, we initialize the size
+(reserve() or resize()) with the estimated size of the collection for better performance.
+Typical C++ STL vector operations used in competitive programming include
+push back(), at(), the [] operator, assign(), clear(), erase(), and iterators for
+traversing the contents of vectors.
+It is appropriate to discuss two operations commonly performed on Arrays: Sorting
+and Searching. These two operations are well supported in C++ and Java.
+There are many sorting algorithms mentioned in CS books [7, 5, 54, 12, 40, 58], e.g.
+1. O(n2) comparison-based sorting algorithms: Bubble/Selection/Insertion Sort, etc.
+These algorithms are (awfully) slow and usually avoided in programming contests,
+though understanding them might help you solve certain problems.
+2. O(n log n) comparison-based sorting algorithms: Merge/Heap/Quick Sort, etc.
+These algorithms are the default choice in programming contests as an O(n log n)
+complexity is optimal for comparison-based sorting. Therefore, these sorting algorithms
+run in the ‘best possible’ time in most cases (see below for special purpose
+sorting algorithms). In addition, these algorithms are well-known and hence we
+do not need to ‘reinvent the wheel’5—we can simply use sort, partial sort, or
+stable sort in C++ STL algorithm (or Collections.sort in Java) for standard
+sorting tasks. We only need to specify the required comparison function and
+these library routines will handle the rest.

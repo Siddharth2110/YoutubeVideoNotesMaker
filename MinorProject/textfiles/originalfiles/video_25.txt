@@ -1,0 +1,68 @@
+Special purpose sorting algorithms: O(n) Counting/Radix/Bucket Sort, etc.
+Although rarely used, these special purpose algorithms are good to know as they
+can reduce the required sorting time if the data has certain special characteristics.
+For example, Counting Sort can be applied to integer data that lies in a small
+range (see Section 9.32).
+There are generally three common methods to search for an item in an array:
+1. O(n) Linear Search: Consider every element from index 0 to index n − 1 (avoid
+this whenever possible).
+2. O(log n) Binary Search: Use lower bound, upper bound, or binary search in
+C++ STL algorithm (or Java Collections.binarySearch). If the input array is
+unsorted, it is necessary to sort the array at least once (using one of the O(n log n)
+sorting algorithm above) before executing one (or many) Binary Search(es).
+3. O(1) with Hashing: This is a useful technique to use when fast access to known
+values are required. If a suitable hash function is selected, the probability of a
+collision to be made is negligibly small. Still, this technique is rarely used and we
+can live without it6 for most (contest) problems.
+Array of Booleans: C++ STL bitset (Java BitSet)
+If our array needs only to contain Boolean values (1/true and 0/false), we can use
+an alternative data structure other than an array—a C++ STL bitset. The bitset
+supports useful operations like reset(), set(), the [] operator and test().
+Bitmasks a.k.a. lightweight, small sets of Booleans (native support in C/C++/Java)
+An integer is stored in a computer’s memory as a sequence/string of bits. Thus, we can
+use integers to represent a lightweight small set of Boolean values. All set operations
+then involve only the bitwise manipulation of the corresponding integer, which makes
+it a much more efficient choice when compared with the C++ STL vector<bool>,
+bitset, or set<int> options. Such speed is important in competitive programming.
+Some important operations that are used in this book are shown below.
+Many bit manipulation operations are written as preprocessor macros in our C/C++
+example source code (but written plainly in our Java example code since Java does
+not support macros).
+Linked List: C++ STL list (Java LinkedList)
+Although this data structure almost always appears in data structure and algorithm
+textbooks, the Linked List is usually avoided in typical (contest) problems. This is due
+to the inefficiency in accessing elements (a linear scan has to be performed from the
+head or the tail of a list) and the usage of pointers makes it prone to runtime errors
+if not implemented properly. In this book, almost all forms of Linked List have been
+replaced by the more flexible C++ STL vector (Java Vector).
+The only exception is probably UVa 11988 - Broken Keyboard (a.k.a. Beiju Text)—
+where you are required to dynamically maintain a (linked) list of characters and efficiently
+insert a new character anywhere in the list, i.e. at front (head), current, or back
+(tail) of the (linked) list. Out of 1903 UVa problems that the authors have solved, this
+is likely to be the only pure linked list problem we have encountered thus far.The only exception is probably UVa 11988 - Broken Keyboard (a.k.a. Beiju Text)—
+where you are required to dynamically maintain a (linked) list of characters and efficiently
+insert a new character anywhere in the list, i.e. at front (head), current, or back
+(tail) of the (linked) list.
+Stack: C++ STL stack (Java Stack)
+This data structure is often used as part of algorithms that solve certain problems (e.g.
+bracket matching in Section 9.4, Postfix calculator and Infix to Postfix conversion in
+Section 9.27, finding Strongly Connected Components in Section 4.2.9 and Graham’s
+scan in Section 7.3.7). A stack only allows for O(1) insertion (push) and O(1) deletion
+(pop) from the top. This behavior is usually referred to as Last In First Out (LIFO) and
+is reminiscent of literal stacks in the real world. Typical C++ STL stack operations
+include push()/pop() (insert/remove from top of stack), top() (obtain content from
+the top of stack), and empty().
+Queue: C++ STL queue (Java Queue9)
+This data structure is used in algorithms like Breadth First Search (BFS) in Section
+4.2.2. A queue only allows for O(1) insertion (enqueue) from the back (tail) and O(1)
+deletion (dequeue) from the front (head). This behavior is similarly referred to as
+First In First Out (FIFO), just like actual queues in the real world. Typical C++
+STL queue operations include push()/pop() (insert from back/remove from front of
+queue), front()/back() (obtain content from the front/back of queue), and empty().
+Double-ended Queue (Deque): C++ STL deque (Java Deque10)
+This data structure is very similar to the resizeable array (vector) and queue above,
+except that deques support fast O(1) insertions and deletions at both the beginning
+and the end of the deque. This feature is important in certain algorithm, e.g. the
+Sliding Window algorithm in Section 9.31. Typical C++ STL deque operations include
+push back(), pop front() (just like the normal queue), push front() and
+pop back() (specific for deque).

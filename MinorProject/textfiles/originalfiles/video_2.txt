@@ -1,0 +1,17 @@
+23andMe
+23andMe is a privately held personal genomics and biotechnology company. The company has developed its whole model around pulling insights from big data to give customers a 360-degree understanding of their genetic history.
+CBA
+Commonwealth Bank of Australia is using big data to analyse customer risk. Using analytics can get better risk assessment businesses, ongoing cash flow performance and early warning of risk challenges.
+
+Centers for Disease Control
+The Centers for Disease Control and Prevention (CDC) is the national public health institute of the United States. Its main aim is to protect people health and safety through the control and prevention of diseases. CDC had to rely on doctor reports of influenza outbreaks. CDC was weeks behind in providing vaccines to the affected patients. Using historical data from the CDC, Google compared search term queries against geographical areas that were known to have had flu outbreaks. Google then found forty five terms correlated with the outbreak of flu. With this data, CDC can act immediately.
+Delta
+Delta Air Lines, Inc. is a major American airline with an extensive domestic and international network. In general the top concern for an airlines would be passenger’s lost baggage. Delta looked further into their data and created a solution that would remove the uncertainty of where a passenger’s bag might be.
+Energy Future Holdings Corporation  
+Energy Future Holdings Corporation is an electric utility company. The majority of the company’s power generation is through coal- and nuclear-power plants. The company used Big data to install smart meters. The smart meters allows the provider to read the meter once every 15 minutes rather than one month.
+Google
+Google constantly develops new products and services that have big data algorithms. Google uses big data to refine its core search and ad-serving algorithms. Google describes that the self-driving car as a big data application.
+Kreditech
+Kreditech is a young tech company headquartered in Hafencity, Hamburg. The European company uses Big Data to create a unique credit score for consumers using more than 8000 sources. The analysis also lead to a surprise discovery of correlation between social media behaviour and financial stability.
+LinkedIn
+LinkedIn is a business-oriented social networking service. Founded in December 2002 and launched in 2003, it is mainly used for professional networking. LinkedIn uses big data to develop product offerings such as people you may know, jobs you may be interested in, who has viewed my profile and more.

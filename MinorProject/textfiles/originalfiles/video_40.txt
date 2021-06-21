@@ -1,0 +1,66 @@
+Having said that, it is increasingly true that problem authors try to set the input bounds
+of problems that allow for Greedy strategies to be in an ambiguous range so that contestants
+cannot use the input size to quickly determine the required algorithm!
+We have to remark that it is quite challenging to come up with new ‘non-classical’
+Greedy problems. Therefore, the number of such novel Greedy problems used in competitive
+programming is lower than that of Complete Search or Dynamic Programming problems.
+Dynamic Programming
+Dynamic Programming (from now on abbreviated as DP) is perhaps the most challenging
+problem-solving technique among the four paradigms discussed in this chapter. Thus, make
+sure that you have mastered the material mentioned in the previous chapters/sections before
+reading this section. Also, prepare to see lots of recursion and recurrence relations!
+The key skills that you have to develop in order to master DP are the abilities to determine
+the problem states and to determine the relationships or transitions between current
+problems and their sub-problems. We have used these skills earlier in recursive backtracking
+(see Section 3.2.2). In fact, DP problems with small input size constraints may already be
+solvable with recursive backtracking.
+If you are new to DP technique, you can start by assuming that (the ‘top-down’) DP is
+a kind of ‘intelligent’ or ‘faster’ recursive backtracking. In this section, we will explain the
+reasons why DP is often faster than recursive backtracking for problems amenable to it.
+DP is primarily used to solve optimization problems and counting problems. If you
+encounter a problem that says “minimize this” or “maximize that” or “count the ways to
+do that”, then there is a (high) chance that it is a DP problem. Most DP problems in
+programming contests only ask for the optimal/total value and not the optimal solution
+itself, which often makes the problem easier to solve by removing the need to backtrack and
+produce the solution. However, some harder DP problems also require the optimal solution
+to be returned in some fashion. We will continually refine our understanding of Dynamic
+Programming in this section.
+3.5.1 DP Illustration
+We will illustrate the concept of Dynamic Programming with an example problem: UVa
+11450 - Wedding Shopping. The abridged problem statement: Given different options for
+each garment (e.g. 3 shirt models, 2 belt models, 4 shoe models, . . . ) and a certain limited
+budget, our task is to buy one model of each garment. We cannot spend more money than
+the given budget, but we want to spend the maximum possible amount.
+The input consists of two integers 1 ≤ M ≤ 200 and 1 ≤ C ≤ 20, where M is the budget
+and C is the number of garments that you have to buy, followed by some information about
+the C garments. For the garment g ∈ [0..C-1], we will receive an integer 1 ≤ K ≤ 20
+which indicates the number of different models there are for that garment g, followed by K
+integers indicating the price of each model ∈ [1..K] of that garment g.
+The output is one integer that indicates the maximum amount of money we can spend
+purchasing one of each garment without exceeding the budget. If there is no solution due to
+the small budget given to us, then simply print “no solution”.
+The answer is then “no solution” because even if we buy all the cheapest models for each
+garment, the total price (4+5+1) = 10 still exceeds our given budget M = 9.
+In order for us to appreciate the usefulness of Dynamic Programming in solving the
+above-mentioned problem, let’s explore how far the other approaches discussed earlier will
+get us in this particular problem.
+Approach 1: Greedy (Wrong Answer)
+Since we want to maximize the budget spent, one greedy idea (there are other greedy
+approaches—which are also WA) is to take the most expensive model for each garment
+g which still fits our budget. For example in test case A above, we can choose the most
+expensive model 3 of garment g = 0 with price 8 (money is now 20-8 = 12), then choose
+the most expensive model 2 of garment g = 1 with price 10 (money = 12-10 = 2), and
+finally for the last garment g = 2, we can only choose model 1 with price 1 as the money we
+have left does not allow us to buy the other models with price 3 or 5. This greedy strategy
+‘works’ for test cases A and B above and produce the same optimal solution (8+10+1) = 19
+and “no solution”, respectively. It also runs very fast8: 20+20+. . .+ 20 for a total of 20
+times = 400 operations in the worst case. However, this greedy strategy does not work for
+many other test cases, such as this counter-example below (test case C):
+Test case C with M = 12, C = 3:
+3 models of garment g = 0 → 6 4 8
+2 models of garment g = 1 → 5 10
+4 models of garment g = 2 → 1 5 3 5
+The Greedy strategy selects model 3 of garment g = 0 with price 8 (money = 12-8 = 4),
+causing us to not have enough money to buy any model in garment g = 1, thus incorrectly
+reporting “no solution”. One optimal solution is 4+5+3 = 12, which uses up all of our
+budget. The optimal solution is not unique as 6+5+1 = 12 also depletes the budget.
